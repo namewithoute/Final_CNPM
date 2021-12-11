@@ -135,10 +135,14 @@ namespace QUANLYKHO
             }
             else if (dialogResult == DialogResult.No)
             {
-                //do something else
             }
 
            
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
