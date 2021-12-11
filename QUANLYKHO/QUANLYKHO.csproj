@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{ADFBA002-3BE1-4C13-9B00-39BF2642F9B8}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>QUANLYKHO</RootNamespace>
+    <AssemblyName>QUANLYKHO</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="FormDangNhap.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormDangNhap.Designer.cs">
+      <DependentUpon>FormDangNhap.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormDanhSachPhieuNhap.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormDanhSachPhieuNhap.Designer.cs">
+      <DependentUpon>FormDanhSachPhieuNhap.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormDanhSachPhieuXuat.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormDanhSachPhieuXuat.Designer.cs">
+      <DependentUpon>FormDanhSachPhieuXuat.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormTaoPhieuNhap.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormTaoPhieuNhap.Designer.cs">
+      <DependentUpon>FormTaoPhieuNhap.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormTaoPhieuXuat.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormTaoPhieuXuat.Designer.cs">
+      <DependentUpon>FormTaoPhieuXuat.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FormDangNhap.resx">
+      <DependentUpon>FormDangNhap.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormDanhSachPhieuNhap.resx">
+      <DependentUpon>FormDanhSachPhieuNhap.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormDanhSachPhieuXuat.resx">
+      <DependentUpon>FormDanhSachPhieuXuat.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormTaoPhieuNhap.resx">
+      <DependentUpon>FormTaoPhieuNhap.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormTaoPhieuXuat.resx">
+      <DependentUpon>FormTaoPhieuXuat.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\QUANLYKHO.CONTROLLER\QUANLYKHO.CONTROLLER.csproj">
+      <Project>{4714d4f1-66ec-4f91-bfa2-39d4b346511d}</Project>
+      <Name>QUANLYKHO.CONTROLLER</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\QUANLYKHO.DTO\QUANLYKHO.DTO.csproj">
+      <Project>{578fd085-eb36-42c8-9bcc-866abba0ce10}</Project>
+      <Name>QUANLYKHO.DTO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\QUANLYKHO.MODEL\QUANLYKHO.MODEL.csproj">
+      <Project>{cdc690e3-7571-46df-aca0-b908febb3d87}</Project>
+      <Name>QUANLYKHO.MODEL</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
