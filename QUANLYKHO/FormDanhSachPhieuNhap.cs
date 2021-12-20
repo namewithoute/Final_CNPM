@@ -8,18 +8,36 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using QUANLYKHO.CONTROLLER;
+using System.Data.SqlClient;
+using System.Activities.Statements;
+
 namespace QUANLYKHO
 {
     public partial class FormDanhSachPhieuNhap : Form
     {
+
+        public static SqlConnection con = new SqlConnection(@"Data Source=DESKTOP-9GIEK94\SQL;Initial Catalog=QUANLYKHO;Integrated Security=True");
+        string id;
+        int id1, delete_id;
+
         public FormDanhSachPhieuNhap()
         {
             InitializeComponent();
         }
+        
+
 
         private void FormDanhSachPhieuNhap_Load(object sender, EventArgs e)
         {
+            if(con.State == ConnectionState.Open)
+            {
+                con.Close();
+            }
+            con.Open();
+
             PhieuNhapCONTROLLER dsMaPhieu = new PhieuNhapCONTROLLER();
+         
+
 
             List<String> dsPhieu1 = new List<string>();
 
@@ -35,7 +53,23 @@ namespace QUANLYKHO
 
             PhieuNhapCONTROLLER dsPhieuNhap = new PhieuNhapCONTROLLER();
             ds_phieunhap.SelectedIndex = 0;
-            dataDanhSachPhieuNhap.DataSource = dsPhieuNhap.loadAll(ds_phieunhap.Items[0].ToString());
+           // dataDanhSachPhieuNhap.DataSource = dsPhieuNhap.loadAll(dsMaPhieu.loadMaPhieuNhap()[0].ToString());
+             fill_grid(dsPhieuNhap.loadMaPhieuNhap()[0].ToString());
+
+        }
+
+
+
+        public void fill_grid(string mpn)
+        {
+            SqlCommand cmd = con.CreateCommand();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = "SELECT STTSanPham, MaSanPham,TenSanpham, SoLuong,DonGia,TongTien FROM PhieuNhapKho where MaPhieuNhap = '"+ mpn+ "'";
+            cmd.ExecuteNonQuery();
+            DataTable dt = new DataTable();
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            da.Fill(dt);
+            dataDanhSachPhieuNhap.DataSource = dt;
 
         }
 
@@ -63,9 +97,12 @@ namespace QUANLYKHO
             PhieuNhapCONTROLLER dsPhieuNhap = new PhieuNhapCONTROLLER();
 
             string curItem = ds_phieunhap.SelectedItem.ToString();
-            dataDanhSachPhieuNhap.DataSource = dsPhieuNhap.loadAll(curItem);
             tenNhanVien.Text = dsPhieuNhap.getName(curItem);
             maPhieuNhap.Text = curItem;
+            fill_grid(curItem);
+
+            //dataDanhSachPhieuNhap.DataSource = dsPhieuNhap.loadAll(curItem);
+
 
 
         }
@@ -101,8 +138,8 @@ namespace QUANLYKHO
             if (this.Name != "FormDanhSachPhieuXuat")
             {
                 this.Hide();
-                FormDanhSachPhieuXuat dsxuat = new FormDanhSachPhieuXuat();
-                dsxuat.Show();
+                FormDanhSachPhieuXuat formDSXuat = new FormDanhSachPhieuXuat();
+                formDSXuat.Show();
             }
         }
 
@@ -110,7 +147,8 @@ namespace QUANLYKHO
         {
            
             FormTaoPhieuNhap taoPhieuNhap = new FormTaoPhieuNhap();
-            taoPhieuNhap.Show();
+            taoPhieuNhap.ShowDialog();
+            this.Hide();
         }
 
         private void tạoPhiếuXuấtKhoToolStripMenuItem_Click(object sender, EventArgs e)
@@ -121,17 +159,23 @@ namespace QUANLYKHO
 
         private void button1_Click(object sender, EventArgs e)
         {
+
             DialogResult dialogResult = MessageBox.Show("Bạn muốn xóa phiếu nhập này ?", "Xác nhận", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
+                SqlCommand cmd = con.CreateCommand();
                 string curItem = ds_phieunhap.SelectedItem.ToString();
-                PhieuNhapCONTROLLER phieunhap = new PhieuNhapCONTROLLER();
 
-                phieunhap.xoaPhieuNhap(curItem);
-                MessageBox.Show("Xóa thành công");
-                this.Close();
-                FormDanhSachPhieuNhap main = new FormDanhSachPhieuNhap();
-                main.Show();
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = "DELETE FROM PhieuNhapKho where MaPhieuNhap = '" + curItem + "'";
+                cmd.ExecuteNonQuery();
+
+
+
+
+                FormDanhSachPhieuNhap objFrmGrafik = new FormDanhSachPhieuNhap();
+                this.Dispose();
+                objFrmGrafik.Show();
             }
             else if (dialogResult == DialogResult.No)
             {
@@ -139,10 +183,111 @@ namespace QUANLYKHO
 
            
         }
+     
 
         private void label4_Click(object sender, EventArgs e)
         {
 
         }
+
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
+        private void dataDanhSachPhieuNhap_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex > -1)
+            {
+                
+                    id = dataDanhSachPhieuNhap.Rows[e.RowIndex].Cells["STTSanPham"].Value.ToString();
+              
+
+                if (id == "")
+                {
+                    id1 = 0;
+                }
+                else
+                {
+                    id1 = Convert.ToInt32(dataDanhSachPhieuNhap.Rows[e.RowIndex].Cells["STTSanPham"].Value.ToString());
+                }
+
+                if (id1 == 0)
+                {
+
+                    SqlCommand cmd = con.CreateCommand();
+                        cmd.CommandType = CommandType.Text;
+                        cmd.CommandText = "INSERT INTO PhieuNhapKho(MaPhieuNhap,TenNhanVien,NgayNhapKho,MaSanPham,TenSanPham,SoLuong,DonGia,TongTien) values ('" + maPhieuNhap.Text.ToString() + "'" +
+                                        ",'" + tenNhanVien.Text.ToString() + "','" +
+                                         ngayNhapKho.Value.Date.ToString("yyyyMMdd") + "'" +
+                                        ",'" + dataDanhSachPhieuNhap.Rows[e.RowIndex].Cells["MaSanPham"].Value.ToString() + "'" +
+                                        ",'" + dataDanhSachPhieuNhap.Rows[e.RowIndex].Cells["TenSanPham"].Value.ToString() + "'" +
+                                        "," +0 +
+                                         "," + 0 +
+                                           "," +0 + ")";
+                         cmd.ExecuteNonQuery();
+                        string curItem = ds_phieunhap.SelectedItem.ToString();
+
+                        fill_grid(curItem);
+
+                    
+
+                }
+                else
+                {
+                    SqlCommand cmd = con.CreateCommand();
+                    cmd.CommandType = CommandType.Text;
+                    cmd.CommandText = "UPDATE PhieuNhapKho set MaPhieuNhap ='" + maPhieuNhap.Text.ToString() + "'," +
+                        "TenNhanVien='" + tenNhanVien.Text.ToString() + "'," +
+                        "NgayNhapKho='" + ngayNhapKho.Value.Date.ToString("yyyyMMdd") + "'," +
+                        "MaSanPham='" + dataDanhSachPhieuNhap.Rows[e.RowIndex].Cells["MaSanPham"].Value.ToString() + "'," +
+                        "TenSanPham='" + dataDanhSachPhieuNhap.Rows[e.RowIndex].Cells["TenSanPham"].Value.ToString() + "'," +
+                        "SoLuong=" + Convert.ToInt32(dataDanhSachPhieuNhap.Rows[e.RowIndex].Cells["SoLuong"].Value.ToString()) + "," +
+                        "DonGia=" + Convert.ToInt32(dataDanhSachPhieuNhap.Rows[e.RowIndex].Cells["DonGia"].Value.ToString()) + "," +
+                        "TongTien=" + Convert.ToInt32(dataDanhSachPhieuNhap.Rows[e.RowIndex].Cells["TongTien"].Value.ToString()) + " " +
+                        "Where STTSanPham = "+ id1 +"";
+
+                    cmd.ExecuteNonQuery();
+                    string curItem = ds_phieunhap.SelectedItem.ToString();
+
+                    fill_grid(curItem);
+
+                }
+            }
+
+
+        }
+
+        private void dataDanhSachPhieuNhap_CellMouseUp(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                delete_id = Convert.ToInt32(dataDanhSachPhieuNhap.Rows[e.RowIndex].Cells["STTSanPham"].Value.ToString());
+                this.contextMenuStrip1.Show(this.dataDanhSachPhieuNhap, e.Location);
+                contextMenuStrip1.Show(Cursor.Position);
+            }
+        }
+
+        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SqlCommand cmd = con.CreateCommand();
+            
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = "DELETE FROM PhieuNhapKho where STTSanPham = " + delete_id+"";
+            cmd.ExecuteNonQuery();
+            string curItem = ds_phieunhap.SelectedItem.ToString();
+
+            fill_grid(curItem);
+
+        }
+
+        private void dataDanhSachPhieuNhap_UserAddedRow(object sender, DataGridViewRowEventArgs e)
+        {
+
+        }
+
+    
+
+       
     }
 }

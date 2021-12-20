@@ -23,7 +23,7 @@ namespace QUANLYKHO.MODEL
         {
             provider.Connect();
 
-            string sql = "SELECT MaSanPham, TenSanPham, SoLuong, DonGia, TongTien FROM PhieuNhapHang where MaPhieuNhap ='"+maphieu+"'";
+            string sql = "SELECT TenSanPham,MaSanPham , SoLuong, DonGia, TongTien FROM PhieuNhapKho where MaPhieuNhap ='" + maphieu+"'";
             SqlDataReader reader = provider.ExcuteReader(sql);
 
             List<PhieuNhapKho> list = new List<PhieuNhapKho>();
@@ -45,7 +45,7 @@ namespace QUANLYKHO.MODEL
         {
             provider.Connect();
 
-            string sql = "SELECT MaPhieuNhap FROM PhieuNhapHang";
+            string sql = "SELECT MaPhieuNhap FROM PhieuNhapKho";
             SqlDataReader reader = provider.ExcuteReader(sql);
 
             List<String> list = new List<String>();
@@ -60,7 +60,7 @@ namespace QUANLYKHO.MODEL
         {
             provider.Connect();
 
-            string sql = "SELECT TenNhanVien FROM PhieuNhapHang where MaPhieuNhap = '"+ maphieunhap+"'";
+            string sql = "SELECT TenNhanVien FROM PhieuNhapKho where MaPhieuNhap = '"+ maphieunhap+"'";
             SqlDataReader reader = provider.ExcuteReader(sql);
             string name = "";
             if (reader.Read() == true)
