@@ -276,7 +276,6 @@ namespace QUANLYKHO
             this.maPhieuNhap.Name = "maPhieuNhap";
             this.maPhieuNhap.Size = new System.Drawing.Size(183, 22);
             this.maPhieuNhap.TabIndex = 11;
-            this.maPhieuNhap.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
             // label4
             // 
@@ -290,7 +289,6 @@ namespace QUANLYKHO
             this.label4.TabIndex = 12;
             this.label4.Text = "PHIẾU NHẬP KHO";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // button1
             // 

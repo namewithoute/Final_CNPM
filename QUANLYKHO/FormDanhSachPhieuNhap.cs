@@ -35,33 +35,38 @@ namespace QUANLYKHO
             }
             con.Open();
 
-            PhieuNhapCONTROLLER dsMaPhieu = new PhieuNhapCONTROLLER();
-         
+            fillListBox();
 
-
-            List<String> dsPhieu1 = new List<string>();
-
-            for (int i = 0; i < dsMaPhieu.loadMaPhieuNhap().Count; i++)
-            {
-                //kiểm tra danh sách phiếu nhập có bị trùng hay không
-                if (!dsPhieu1.Contains(dsMaPhieu.loadMaPhieuNhap()[i]))
-                {
-                    dsPhieu1.Add(dsMaPhieu.loadMaPhieuNhap()[i]);
-                    ds_phieunhap.Items.Add(dsMaPhieu.loadMaPhieuNhap()[i]);
-                }
-            }
-
-            PhieuNhapCONTROLLER dsPhieuNhap = new PhieuNhapCONTROLLER();
             ds_phieunhap.SelectedIndex = 0;
-           // dataDanhSachPhieuNhap.DataSource = dsPhieuNhap.loadAll(dsMaPhieu.loadMaPhieuNhap()[0].ToString());
-             fill_grid(dsPhieuNhap.loadMaPhieuNhap()[0].ToString());
+            string curItem = ds_phieunhap.SelectedItem.ToString();
+
+            fill_grid(curItem);
+        }
+
+        private void fillListBox()
+        {
+            SqlCommand cmd = new SqlCommand();
+
+            cmd.Connection = con;
+            cmd.CommandText = "SELECT DISTINCT MaPhieuNhap FROM PhieuNhapKho";
+            SqlDataReader dr = cmd.ExecuteReader();
+            while (dr.Read())
+            {
+                ds_phieunhap.Items.Add(dr.GetString(0));
+            }
+            con.Close();
+
 
         }
 
 
-
         public void fill_grid(string mpn)
         {
+            if (con.State == ConnectionState.Open)
+            {
+                con.Close();
+            }
+            con.Open();
             SqlCommand cmd = con.CreateCommand();
             cmd.CommandType = CommandType.Text;
             cmd.CommandText = "SELECT STTSanPham, MaSanPham,TenSanpham, SoLuong,DonGia,TongTien FROM PhieuNhapKho where MaPhieuNhap = '"+ mpn+ "'";
@@ -117,11 +122,7 @@ namespace QUANLYKHO
 
         }
 
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
+      
         private void danhSáchPhiếuNhậpKhoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (this.Name == "FormDanhSachPhieuNhap") { }
@@ -185,10 +186,7 @@ namespace QUANLYKHO
         }
      
 
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
+      
 
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
@@ -281,10 +279,7 @@ namespace QUANLYKHO
 
         }
 
-        private void dataDanhSachPhieuNhap_UserAddedRow(object sender, DataGridViewRowEventArgs e)
-        {
-
-        }
+      
 
     
 

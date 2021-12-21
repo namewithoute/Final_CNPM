@@ -14,6 +14,8 @@ namespace QUANLYKHO
 {
     public partial class FormDanhSachPhieuXuat : Form
     {
+        string id;
+        int id1, delete_id;
         public static SqlConnection con = new SqlConnection(@"Data Source=DESKTOP-9GIEK94\SQL;Initial Catalog=QUANLYKHO;Integrated Security=True");
         public FormDanhSachPhieuXuat()
         {
@@ -22,17 +24,6 @@ namespace QUANLYKHO
 
 
 
-        public void fill_grid(string mpn)
-        {
-            SqlCommand cmd = con.CreateCommand();
-            cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "SELECT MaSanPham, TenSanPham, SoLuong,DonGia,TongTien FROM PhieuXuatKho where MaPhieuNhap = '" + mpn + "'";
-            cmd.ExecuteNonQuery();
-            DataTable dt = new DataTable();
-            SqlDataAdapter da = new SqlDataAdapter(cmd);
-            da.Fill(dt);
-            dataDanhSachXuat.DataSource = dt;
-        }
 
         private void label6_Click(object sender, EventArgs e)
         {
@@ -44,8 +35,11 @@ namespace QUANLYKHO
         private void fillListBox()
         {
             SqlCommand cmd = new SqlCommand();
+            if (con.State == ConnectionState.Open)
+            {
+                con.Close();
+            }
             con.Open();
-
             cmd.Connection = con;
             cmd.CommandText = "SELECT DISTINCT MaPhieuXuat FROM PhieuXuatKho";
             SqlDataReader dr = cmd.ExecuteReader();
@@ -66,14 +60,15 @@ namespace QUANLYKHO
             }
             con.Open();
             SqlCommand cmd = con.CreateCommand();
+            cmd.Parameters.Clear();
             cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "SELECT STTSanPhamXuat, MaSanPham,TenSanPham, SoLuong,DonGia,TongTien FROM PhieuXuatKho where MaPhieuXuat = '" + mpx + "'";
+            cmd.CommandText = "SELECT STTSanPhamXuat, TenSanPham,MaSanPham, SoLuong,DonGia,TongTien FROM PhieuXuatKho where MaPhieuXuat = '" + mpx + "'";
             cmd.ExecuteNonQuery();
             DataTable dt = new DataTable();
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             da.Fill(dt);
+           
             dataDanhSachXuat.DataSource = dt;
-
         }
 
 
@@ -93,9 +88,10 @@ namespace QUANLYKHO
             da.SelectCommand = lenh;
             DataTable dt = new DataTable("SP");
             da.Fill(dt);
-            TenSanPham.DataSource = dt;
             TenSanPham.ValueMember = "TenSanPham";
             TenSanPham.DisplayMember = "TenSanPham";
+            TenSanPham.DataSource = dt;
+
         }
 
 
@@ -106,8 +102,14 @@ namespace QUANLYKHO
             dsMaXuat.SelectedIndex = 0;
             string curItem = dsMaXuat.SelectedItem.ToString();
             fillCombo();
+            getInfo(curItem);
+            comboTTGiaoHang.Items.Add("Đang xử lý");
+            comboTTGiaoHang.Items.Add("Đang giao");
+            comboTTGiaoHang.Items.Add("Giao thành công");
 
-            fillGrid(curItem);
+
+            comboTTThanhToan.Items.Add("Chưa thanh toán");
+            comboTTThanhToan.Items.Add("Đã thanh toán");
 
         }
 
@@ -127,13 +129,16 @@ namespace QUANLYKHO
         private void dsMaXuat_SelectedIndexChanged(object sender, EventArgs e)
         {
             string curItem = dsMaXuat.SelectedItem.ToString();
+            fillCombo();
             getInfo(curItem);
         }
 
 
         private void getInfo(string mpx)
         {
+
             SqlCommand cmd = new SqlCommand();
+            cmd.Parameters.Clear();
             SqlDataAdapter da = new SqlDataAdapter();
             DataTable dt = new DataTable("INFO");
 
@@ -144,7 +149,7 @@ namespace QUANLYKHO
             con.Open();
             cmd.Connection = con;
 
-            cmd.CommandText = "SELECT DISTINCT MaPhieuXuat,TenNguoiNhan,SoDienThoai,DiaChi,NgayXuatKho FROM PhieuXuatKho where MaPhieuXuat = '"+mpx+"'";
+            cmd.CommandText = "SELECT DISTINCT MaPhieuXuat,TenNguoiNhan,SoDienThoai,DiaChi,NgayXuatKho,TTGiaoHang,TTThanhToan FROM PhieuXuatKho where MaPhieuXuat = '"+mpx+"'";
             da.SelectCommand = cmd;
             da.Fill(dt);
             if (dt.Rows.Count > 0)
@@ -155,9 +160,184 @@ namespace QUANLYKHO
                 soDienThoai.Text = dt.Rows[0]["SoDienThoai"].ToString();
                 diaChi.Text = dt.Rows[0]["DiaChi"].ToString();
                 ngayXuatKho.Text = dt.Rows[0]["NgayXuatKho"].ToString();
+                comboTTThanhToan.Text = dt.Rows[0]["TTThanhToan"].ToString();
+                comboTTGiaoHang.Text = dt.Rows[0]["TTGiaoHang"].ToString();
+
             }
+
+
             string curItem = dsMaXuat.SelectedItem.ToString();
             fillGrid(curItem);
             }
+
+        private void btnXoaPhieu_Click(object sender, EventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show("Bạn muốn xóa phiếu xuất này ?", "Xác nhận", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                SqlCommand cmd = con.CreateCommand();
+                string curItem = dsMaXuat.SelectedItem.ToString();
+
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = "DELETE FROM PhieuXuatKho where MaPhieuXuat = '" + curItem + "'";
+                cmd.ExecuteNonQuery();
+
+
+
+
+                FormDanhSachPhieuXuat objFrmGrafik = new FormDanhSachPhieuXuat();
+                this.Dispose();
+                objFrmGrafik.Show();
+            }
+            else if (dialogResult == DialogResult.No)
+            {
+            }
+        }
+
+        private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
+        {
+
+        }
+
+
+        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SqlCommand cmd = con.CreateCommand();
+
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = "DELETE FROM PhieuXuatKho where STTSanPhamXuat = " + delete_id + "";
+            cmd.ExecuteNonQuery();
+            string curItem = dsMaXuat.SelectedItem.ToString();
+            fillCombo();
+            fillGrid(curItem);
+
+        }
+
+        private void dataDanhSachXuat_CellMouseUp(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                delete_id = Convert.ToInt32(dataDanhSachXuat.Rows[e.RowIndex].Cells["STTSanPhamXuat"].Value.ToString());
+                this.contextMenuStrip1.Show(this.dataDanhSachXuat, e.Location);
+                contextMenuStrip1.Show(Cursor.Position);
+            }
+        }
+
+        private void comboTTGiaoHang_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (con.State == ConnectionState.Open)
+            {
+                con.Close();
+            }
+
+
+            con.Open();
+            string curItem = dsMaXuat.SelectedItem.ToString();
+
+            SqlCommand cmd = con.CreateCommand();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = "UPDATE PhieuXuatKho set TTGiaoHang = '" + comboTTGiaoHang.SelectedItem.ToString() + "' where MaPhieuXuat ='" + curItem +"'";
+            cmd.ExecuteNonQuery();
+
+            fillGrid(curItem);
+
+
+        }
+
+        private void tenNguoiNhan_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboTTThanhToan_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (con.State == ConnectionState.Open)
+            {
+                con.Close();
+            }
+
+
+            con.Open();
+            string curItem = dsMaXuat.SelectedItem.ToString();
+
+            SqlCommand cmd = con.CreateCommand();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = "UPDATE PhieuXuatKho set TTThanhToan = '" + comboTTThanhToan.SelectedItem.ToString() + "' where MaPhieuXuat ='" + curItem + "'";
+            cmd.ExecuteNonQuery();
+
+            fillGrid(curItem);
+
+        }
+
+        private void dataDanhSachXuat_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+
+            if (e.RowIndex > -1)
+            {
+
+                id = dataDanhSachXuat.Rows[e.RowIndex].Cells["STTSanPhamXuat"].Value.ToString();
+
+
+                if (id == "")
+                {
+                    id1 = 0;
+                }
+                else
+                {
+                    id1 = Convert.ToInt32(dataDanhSachXuat.Rows[e.RowIndex].Cells["STTSanPhamXuat"].Value.ToString());
+                }
+
+                if (id1 == 0)
+                {
+
+                    SqlCommand cmd = con.CreateCommand();
+                    cmd.CommandType = CommandType.Text;
+                    cmd.CommandText = "INSERT INTO PhieuXuatKho(MaPhieuXuat,TenNguoiNhan,SoDienThoai,DiaChi,NgayXuatKho,MaSanPham,TenSanPham,SoLuong, DonGia,TongTien,TTThanhToan,TTGiaoHang) values ('" + maPhieuXuat.Text.ToString() + "'" +
+                                    ",'" + tenNguoiNhan.Text.ToString() + "','" +
+                                     soDienThoai.Text.ToString() + "'" +
+                                    ",'" + diaChi.Text.ToString() + "'" +
+                                    ",'" + ngayXuatKho.Value.Date.ToString("yyyyMMdd") + "'" +
+                                    ",'" + dataDanhSachXuat.Rows[e.RowIndex].Cells["MaSanPham"].Value.ToString() +
+                                     "','" + Convert.ToString((dataDanhSachXuat.Rows[e.RowIndex].Cells["TenSanPham"] as DataGridViewComboBoxCell).FormattedValue.ToString()) +
+                                       "'," +0 +
+                                        "," + 0 +
+                                         "," +0 + 
+                                         ",'" +  comboTTThanhToan.SelectedItem.ToString()+"'," +
+                                         "'"+comboTTGiaoHang.SelectedItem.ToString() + ")";
+                    cmd.ExecuteNonQuery();
+                    string curItem = dsMaXuat.SelectedItem.ToString();
+
+                    fillGrid(curItem);
+
+
+
+                }
+                else
+                {
+                    SqlCommand cmd = con.CreateCommand();
+                    cmd.CommandType = CommandType.Text;
+                    cmd.CommandText = "UPDATE PhieuXuatKho set MaPhieuXuat ='" + maPhieuXuat.Text.ToString() + "'," +
+                        "TenNguoiNhan='" + tenNguoiNhan.Text.ToString() + "'," +
+                        "SoDienThoai='" + soDienThoai.Text.ToString() + "'," +
+                        "DiaChi='" + diaChi.Text.ToString() + "'," +
+                        "NgayXuatKho='" + ngayXuatKho.Value.Date.ToString("yyyyMMdd") + "'," +
+                        "MaSanPham='" + dataDanhSachXuat.Rows[e.RowIndex].Cells["MaSanPham"].Value.ToString() + "'," +
+                        "TenSanPham='" + Convert.ToString((dataDanhSachXuat.Rows[e.RowIndex].Cells["TenSanPham"] as DataGridViewComboBoxCell).FormattedValue.ToString()) + "'," +
+                        "SoLuong=" + Convert.ToInt32(dataDanhSachXuat.Rows[e.RowIndex].Cells["SoLuong"].Value.ToString()) + "," +
+                         "DonGia=" + Convert.ToInt32(dataDanhSachXuat.Rows[e.RowIndex].Cells["DonGia"].Value.ToString()) + "," +
+                         "TongTien=" + Convert.ToInt32(dataDanhSachXuat.Rows[e.RowIndex].Cells["TongTien"].Value.ToString()) + "," +
+                         "TTThanhToan='" +comboTTThanhToan.SelectedItem.ToString() + "'," +
+                         "TTGiaoHang='" + comboTTGiaoHang.SelectedItem.ToString() + "'" +
+
+                        "Where STTSanPhamXuat = " + id1 + "";
+
+                    cmd.ExecuteNonQuery();
+                    string curItem = dsMaXuat.SelectedItem.ToString();
+
+                    fillGrid(curItem);
+
+                }
+            }
+        }
     }
 }
