@@ -238,7 +238,7 @@ namespace QUANLYKHO
             cmd.CommandType = CommandType.Text;
             cmd.CommandText = "UPDATE PhieuXuatKho set TTGiaoHang = '" + comboTTGiaoHang.SelectedItem.ToString() + "' where MaPhieuXuat ='" + curItem +"'";
             cmd.ExecuteNonQuery();
-
+            fillCombo();
             fillGrid(curItem);
 
 
@@ -264,7 +264,7 @@ namespace QUANLYKHO
             cmd.CommandType = CommandType.Text;
             cmd.CommandText = "UPDATE PhieuXuatKho set TTThanhToan = '" + comboTTThanhToan.SelectedItem.ToString() + "' where MaPhieuXuat ='" + curItem + "'";
             cmd.ExecuteNonQuery();
-
+            fillCombo();
             fillGrid(curItem);
 
         }
@@ -292,7 +292,7 @@ namespace QUANLYKHO
 
                     SqlCommand cmd = con.CreateCommand();
                     cmd.CommandType = CommandType.Text;
-                    cmd.CommandText = "INSERT INTO PhieuXuatKho(MaPhieuXuat,TenNguoiNhan,SoDienThoai,DiaChi,NgayXuatKho,MaSanPham,TenSanPham,SoLuong, DonGia,TongTien,TTThanhToan,TTGiaoHang) values ('" + maPhieuXuat.Text.ToString() + "'" +
+                    cmd.CommandText = "INSERT INTO PhieuXuatKho(MaPhieuXuat,TenNguoiNhan,SoDienThoai,DiaChi,NgayXuatKho,MaSanPham,TenSanPham,SoLuong, DonGia,TongTien) values ('" + maPhieuXuat.Text.ToString() + "'" +
                                     ",'" + tenNguoiNhan.Text.ToString() + "','" +
                                      soDienThoai.Text.ToString() + "'" +
                                     ",'" + diaChi.Text.ToString() + "'" +
@@ -301,12 +301,9 @@ namespace QUANLYKHO
                                      "','" + Convert.ToString((dataDanhSachXuat.Rows[e.RowIndex].Cells["TenSanPham"] as DataGridViewComboBoxCell).FormattedValue.ToString()) +
                                        "'," +0 +
                                         "," + 0 +
-                                         "," +0 + 
-                                         ",'" +  comboTTThanhToan.SelectedItem.ToString()+"'," +
-                                         "'"+comboTTGiaoHang.SelectedItem.ToString() + ")";
+                                         "," +0 + ")";
                     cmd.ExecuteNonQuery();
                     string curItem = dsMaXuat.SelectedItem.ToString();
-
                     fillGrid(curItem);
 
 
@@ -325,15 +322,13 @@ namespace QUANLYKHO
                         "TenSanPham='" + Convert.ToString((dataDanhSachXuat.Rows[e.RowIndex].Cells["TenSanPham"] as DataGridViewComboBoxCell).FormattedValue.ToString()) + "'," +
                         "SoLuong=" + Convert.ToInt32(dataDanhSachXuat.Rows[e.RowIndex].Cells["SoLuong"].Value.ToString()) + "," +
                          "DonGia=" + Convert.ToInt32(dataDanhSachXuat.Rows[e.RowIndex].Cells["DonGia"].Value.ToString()) + "," +
-                         "TongTien=" + Convert.ToInt32(dataDanhSachXuat.Rows[e.RowIndex].Cells["TongTien"].Value.ToString()) + "," +
-                         "TTThanhToan='" +comboTTThanhToan.SelectedItem.ToString() + "'," +
-                         "TTGiaoHang='" + comboTTGiaoHang.SelectedItem.ToString() + "'" +
+                         "TongTien=" + Convert.ToInt32(dataDanhSachXuat.Rows[e.RowIndex].Cells["TongTien"].Value.ToString()) + "" +
+                        
 
                         "Where STTSanPhamXuat = " + id1 + "";
 
                     cmd.ExecuteNonQuery();
                     string curItem = dsMaXuat.SelectedItem.ToString();
-
                     fillGrid(curItem);
 
                 }
