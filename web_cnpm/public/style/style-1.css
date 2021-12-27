@@ -1,0 +1,252 @@
+
+body{
+    font-size: 16px;
+    font-family: 'Quicksand', sans-serif;
+}
+
+*{
+    padding: 0px;
+    margin: 0px;
+}
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+    padding: 10px 10px;
+}
+
+
+.logo{
+    width: 200px;
+    margin-right: 5rem;
+    margin-left: 9%;
+}
+.logo img{
+    width: 100%;
+}
+
+
+
+
+
+
+.menu-top{
+    width: 100%;
+    margin: 0px;
+    padding: 2px;
+    flex: 3;
+    display: flex;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+.menu-top ul{
+    width: 100%;
+}
+.menu-top ul li{
+    list-style: none;
+    float: left;
+    margin-top: 5px;
+}
+.menu-top ul li a{
+    font-weight: bold;
+    text-decoration: none;
+    display: block;
+    height: 40px;
+    line-height: 40px;
+    color: black;
+    padding: 0px 20px 0px 20px;
+    font-size: 12px;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 12px;
+}
+.menu-top ul li:hover{
+    color: #dddddd;
+    border-bottom: 1px solid black;
+    transition: all 0.3s;
+}
+
+
+.search input{
+    border-radius: 20px;
+}
+.search button{
+    border-radius: 20px;
+    position: absolute;
+    left: 96%;
+}
+.search button i{
+    font-size: 100%;
+    width: auto;
+}
+
+
+.cart-count{
+    border: 1px black solid!important;
+    margin: 0 0.5px!important;
+    border-radius: 0!important;
+}
+.cart i{
+    color: black;
+    padding-right: 5px;
+}
+.cart{
+    display: flex;
+    align-items: center;
+}
+.cart i:hover{
+    color: #555555;
+}
+
+
+
+
+
+
+
+.footer-3{
+    background: rgb(245, 243, 243);
+    padding: 1rem;
+}
+
+
+.footer-3 ul li{
+    margin-top: 0.5rem;
+
+}
+.link-support ul li, .link-support ul li a{
+    font-size: 12.5px;
+
+}
+.link-support ul li a{
+    text-decoration: none;
+    color: black;
+}
+.link-support ul li:hover a{
+    color: brown;
+}
+.link-support .text{
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.info-col a , .info-col i{
+    font-size: 28px;
+    text-decoration: none!important;
+    color: black;
+}
+.info-col a i{
+    color: red;
+}
+.info-col:hover a, .info-col:hover i {
+    color: rgba(3, 189, 111, 0.966);
+}
+.info-social i{
+    font-size: 26px;
+}
+.info-foot{
+    font-size: 14px;
+    margin-top: 0.8rem;
+}
+.minus-item{
+    /* margin-left: 2rem; */
+    border-radius: 0!important;
+}
+
+.thanhtoan{
+    width: 100%;
+}
+.thanhtoan button{
+    width: 95%;
+
+}
+.thanhtoan .price{
+    background: rgba(180, 180, 180, 0.192);
+    border-radius: 9px;
+    padding: 1rem;    
+}
+/* .price-text{
+    font-family: 'Quicksand', sans-serif;
+    font-size: 120%;
+
+} */
+.total-1{
+    font-size: 120%;
+}
+.total{
+    font-size: 150%;
+    color: red;
+}
+.require-cart{
+    display: none;
+   
+}
+.thongtins{
+    display: none;
+    position: fixed;
+    width: 60%;
+    top: 20%;
+    left: 20%;
+}
+#xacnhandathang{
+    display: none;
+    position: fixed;
+    width: 60%;
+    top: 20%;
+    left: 20%;
+}
+.chitietsanpham{
+    padding-top: 2.5rem;
+}
+.sanpham{
+    display: flex;
+}
+
+.sanpham .hinhanh{
+    width: 60%;
+}
+.sanpham .hinhanh img{
+    width: 100%;
+}
+.sanpham .content{
+    display: flex;
+    flex-direction: column;
+    padding-left: 2rem;
+}
+.sanpham .content .title-name{
+    display: block;
+}
+.sanpham .content .title-ma{
+    display: block;
+}
+.sanpham .content .title-trangthai{
+    display: block;
+    margin: 0.5rem 0;
+    font-weight: 700;
+}
+.title{
+    border-bottom: 1px solid rgba(75, 75, 75, 0.13);
+    margin-bottom: 0.5rem;
+}
+.content .price{
+    font-weight: 700;
+    font-size: 150%;
+}
+.themhang{
+    margin-top: 1rem;
+}
+.giaohang{
+    display: flex;
+    margin-top: 1rem;
+    margin-left: 0rem;
+}
+.giaohang-content p{
+    font-size: 80%;
+    font-weight: 400;
+}
+.giaohang-content h4{
+    font-weight: 450;
+}
+.giaohang-content{
+    margin-left: 0.7rem;
+}
