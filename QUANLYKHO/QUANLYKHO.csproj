@@ -74,6 +74,12 @@
     <Compile Include="FormDanhSachPhieuXuat.Designer.cs">
       <DependentUpon>FormDanhSachPhieuXuat.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormDonHang.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormDonHang.Designer.cs">
+      <DependentUpon>FormDonHang.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormTaoPhieuNhap.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -96,6 +102,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormDanhSachPhieuXuat.resx">
       <DependentUpon>FormDanhSachPhieuXuat.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormDonHang.resx">
+      <DependentUpon>FormDonHang.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormTaoPhieuNhap.resx">
       <DependentUpon>FormTaoPhieuNhap.cs</DependentUpon>
@@ -124,20 +133,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\QUANLYKHO.CONTROLLER\QUANLYKHO.CONTROLLER.csproj">
-      <Project>{4714d4f1-66ec-4f91-bfa2-39d4b346511d}</Project>
-      <Name>QUANLYKHO.CONTROLLER</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\QUANLYKHO.DTO\QUANLYKHO.DTO.csproj">
-      <Project>{578fd085-eb36-42c8-9bcc-866abba0ce10}</Project>
-      <Name>QUANLYKHO.DTO</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\QUANLYKHO.MODEL\QUANLYKHO.MODEL.csproj">
-      <Project>{cdc690e3-7571-46df-aca0-b908febb3d87}</Project>
-      <Name>QUANLYKHO.MODEL</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

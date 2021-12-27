@@ -83,7 +83,7 @@ namespace QUANLYKHO
 
             con.Open();
 
-            SqlCommand lenh = new SqlCommand("SELECT DISTINCT TenSanPham  From PhieuXuatKho", con);
+            SqlCommand lenh = new SqlCommand("SELECT DISTINCT TenSanPham  From PhieuNhapKho", con);
             SqlDataAdapter da = new SqlDataAdapter();
             da.SelectCommand = lenh;
             DataTable dt = new DataTable("SP");
@@ -115,15 +115,7 @@ namespace QUANLYKHO
 
         private void dataDanhSachXuat_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
-            if (e.Exception.Message == "DataGridViewComboBoxCell value is not valid.")
-            {
-                object value = dataDanhSachXuat.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
-                if (!((DataGridViewComboBoxColumn)dataDanhSachXuat.Columns[e.ColumnIndex]).Items.Contains(value))
-                {
-                    ((DataGridViewComboBoxColumn)dataDanhSachXuat.Columns[e.ColumnIndex]).Items.Add(value);
-                    e.ThrowException = false;
-                }
-            }
+         
         }
 
         private void dsMaXuat_SelectedIndexChanged(object sender, EventArgs e)
@@ -293,12 +285,12 @@ namespace QUANLYKHO
                     SqlCommand cmd = con.CreateCommand();
                     cmd.CommandType = CommandType.Text;
                     cmd.CommandText = "INSERT INTO PhieuXuatKho(MaPhieuXuat,TenNguoiNhan,SoDienThoai,DiaChi,NgayXuatKho,MaSanPham,TenSanPham,SoLuong, DonGia,TongTien) values ('" + maPhieuXuat.Text.ToString() + "'" +
-                                    ",'" + tenNguoiNhan.Text.ToString() + "','" +
+                                    ",N'" + tenNguoiNhan.Text.ToString() + "','" +
                                      soDienThoai.Text.ToString() + "'" +
                                     ",'" + diaChi.Text.ToString() + "'" +
                                     ",'" + ngayXuatKho.Value.Date.ToString("yyyyMMdd") + "'" +
                                     ",'" + dataDanhSachXuat.Rows[e.RowIndex].Cells["MaSanPham"].Value.ToString() +
-                                     "','" + Convert.ToString((dataDanhSachXuat.Rows[e.RowIndex].Cells["TenSanPham"] as DataGridViewComboBoxCell).FormattedValue.ToString()) +
+                                     "',N'" + Convert.ToString((dataDanhSachXuat.Rows[e.RowIndex].Cells["TenSanPham"] as DataGridViewComboBoxCell).FormattedValue.ToString()) +
                                        "'," +0 +
                                         "," + 0 +
                                          "," +0 + ")";
@@ -319,7 +311,7 @@ namespace QUANLYKHO
                         "DiaChi='" + diaChi.Text.ToString() + "'," +
                         "NgayXuatKho='" + ngayXuatKho.Value.Date.ToString("yyyyMMdd") + "'," +
                         "MaSanPham='" + dataDanhSachXuat.Rows[e.RowIndex].Cells["MaSanPham"].Value.ToString() + "'," +
-                        "TenSanPham='" + Convert.ToString((dataDanhSachXuat.Rows[e.RowIndex].Cells["TenSanPham"] as DataGridViewComboBoxCell).FormattedValue.ToString()) + "'," +
+                        "TenSanPham=N'" + Convert.ToString((dataDanhSachXuat.Rows[e.RowIndex].Cells["TenSanPham"] as DataGridViewComboBoxCell).FormattedValue.ToString()) + "'," +
                         "SoLuong=" + Convert.ToInt32(dataDanhSachXuat.Rows[e.RowIndex].Cells["SoLuong"].Value.ToString()) + "," +
                          "DonGia=" + Convert.ToInt32(dataDanhSachXuat.Rows[e.RowIndex].Cells["DonGia"].Value.ToString()) + "," +
                          "TongTien=" + Convert.ToInt32(dataDanhSachXuat.Rows[e.RowIndex].Cells["TongTien"].Value.ToString()) + "" +

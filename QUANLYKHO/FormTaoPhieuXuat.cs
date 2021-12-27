@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using System.Data.SqlClient;
 namespace QUANLYKHO
 {
     public partial class FormTaoPhieuXuat : Form
@@ -16,20 +16,72 @@ namespace QUANLYKHO
         {
             InitializeComponent();
         }
+        SqlConnection sqlCon = new SqlConnection(@"Data Source=DESKTOP-9GIEK94\SQL;Initial Catalog=QUANLYKHO;Integrated Security=True");
 
-        private void label4_Click(object sender, EventArgs e)
+        private void btnXacNhan_Click(object sender, EventArgs e)
         {
+            if (maPhieuXuat.Text.ToString() == "" || tenNguoiNhan.Text.ToString() == "" || soDienThoai.Text.ToString() == "" || diaChi.Text.ToString() == ""|| dataTaoPhieuXuat.Rows[0].Cells["MaSanPham"].Value.ToString()==""|| dataTaoPhieuXuat.Rows[0].Cells["TenSanPham"].Value.ToString()==""|| dataTaoPhieuXuat.Rows[0].Cells["SoLuong"].Value.ToString()=="")
+            {
+                MessageBox.Show("Vui lòng không để trống");
+            }
+            else
+            {
+                for (int i = 0; i < (dataTaoPhieuXuat.Rows.Count - 1); i++)
+                {
+                    SqlCommand cmd = new SqlCommand(@"INSERT INTO PhieuXuatKho(MaPhieuXuat,TenNguoiNhan,SoDienThoai,DiaChi,NgayXuatKho,MaSanPham,TenSanPham,SoLuong,DonGia,TongTien,TTThanhToan,TTGiaoHang) values ('" + maPhieuXuat.Text.ToString() + "'" +
+                                            ",N'" + tenNguoiNhan.Text.ToString() + "','" +
+                                             soDienThoai.Text.ToString() + "'" +
+                                             ",'" + diaChi.Text.ToString() + "'," +
+                                             "'" + ngayXuat.Value.Date.ToString("yyyyMMdd") + "'" +
+                                            ",'" + dataTaoPhieuXuat.Rows[i].Cells["MaSanPham"].Value.ToString() + "'" +
+                                            ",N'" + dataTaoPhieuXuat.Rows[i].Cells["TenSanPham"].Value.ToString() + "'" +
+                                            "," + Convert.ToInt32(dataTaoPhieuXuat.Rows[i].Cells["SoLuong"].Value.ToString()) +
+                                             "," + Convert.ToInt32(dataTaoPhieuXuat.Rows[i].Cells["DonGia"].Value.ToString()) +
+                                               "," + Convert.ToInt32(dataTaoPhieuXuat.Rows[i].Cells["TongTien"].Value.ToString()) + ",N'"+
+                                                comboTTTT.SelectedItem.ToString() +"',N'"+
+                                                 comboTTGH.SelectedItem.ToString()+"')", sqlCon);
+                    if (sqlCon.State == ConnectionState.Open)
+                    {
+                        sqlCon.Close();
+                    }
 
+                    sqlCon.Open();
+                    cmd.ExecuteNonQuery();
+                    sqlCon.Close();
+                }
+                MessageBox.Show("Thêm thành công!");
+                this.Close();
+                FormDanhSachPhieuXuat ds = new FormDanhSachPhieuXuat();
+                ds.Show();
+            }
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void FormTaoPhieuXuat_Load(object sender, EventArgs e)
         {
+            comboTTGH.Items.Add("Đang xử lý");
+            comboTTGH.Items.Add("Đang giao");
+            comboTTGH.Items.Add("Giao thành công");
 
-        }
 
-        private void label6_Click(object sender, EventArgs e)
-        {
+            comboTTTT.Items.Add("Chưa thanh toán");
+            comboTTTT.Items.Add("Đã thanh toán");
 
+            if (sqlCon.State == ConnectionState.Open)
+            {
+                sqlCon.Close();
+            }
+
+
+            sqlCon.Open();
+
+            SqlCommand lenh = new SqlCommand("SELECT DISTINCT TenSanPham  From PhieuNhapKho", sqlCon);
+            SqlDataAdapter da = new SqlDataAdapter();
+            da.SelectCommand = lenh;
+            DataTable dt = new DataTable("SP");
+            da.Fill(dt);
+            TenSanPham.ValueMember = "TenSanPham";
+            TenSanPham.DisplayMember = "TenSanPham";
+            TenSanPham.DataSource = dt;
         }
     }
 }

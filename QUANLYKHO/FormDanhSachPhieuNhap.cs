@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using QUANLYKHO.CONTROLLER;
 using System.Data.SqlClient;
 using System.Activities.Statements;
 
@@ -39,7 +38,7 @@ namespace QUANLYKHO
 
             ds_phieunhap.SelectedIndex = 0;
             string curItem = ds_phieunhap.SelectedItem.ToString();
-
+            fillName(curItem);
             fill_grid(curItem);
         }
 
@@ -55,8 +54,25 @@ namespace QUANLYKHO
                 ds_phieunhap.Items.Add(dr.GetString(0));
             }
             con.Close();
+        }
+        private void fillName(string mpx)
+        {
+            if (con.State == ConnectionState.Open)
+            {
+                con.Close();
+            }
+            con.Open();
 
+            SqlCommand cmd = new SqlCommand();
 
+            cmd.Connection = con;
+            cmd.CommandText = "SELECT DISTINCT TenNhanVien FROM PhieuNhapKho where MaPhieuNhap ='" + mpx+"'";
+            SqlDataReader dr = cmd.ExecuteReader();
+            while (dr.Read())
+            {
+                tenNhanVien.Text = dr.GetString(0);
+            }
+            con.Close();
         }
 
 
@@ -99,11 +115,11 @@ namespace QUANLYKHO
         {
 
 
-            PhieuNhapCONTROLLER dsPhieuNhap = new PhieuNhapCONTROLLER();
 
             string curItem = ds_phieunhap.SelectedItem.ToString();
-            tenNhanVien.Text = dsPhieuNhap.getName(curItem);
             maPhieuNhap.Text = curItem;
+            fillName(curItem);
+
             fill_grid(curItem);
 
             //dataDanhSachPhieuNhap.DataSource = dsPhieuNhap.loadAll(curItem);
@@ -216,10 +232,10 @@ namespace QUANLYKHO
                     SqlCommand cmd = con.CreateCommand();
                         cmd.CommandType = CommandType.Text;
                         cmd.CommandText = "INSERT INTO PhieuNhapKho(MaPhieuNhap,TenNhanVien,NgayNhapKho,MaSanPham,TenSanPham,SoLuong,DonGia,TongTien) values ('" + maPhieuNhap.Text.ToString() + "'" +
-                                        ",'" + tenNhanVien.Text.ToString() + "','" +
+                                        ",N'" + tenNhanVien.Text.ToString() + "','" +
                                          ngayNhapKho.Value.Date.ToString("yyyyMMdd") + "'" +
                                         ",'" + dataDanhSachPhieuNhap.Rows[e.RowIndex].Cells["MaSanPham"].Value.ToString() + "'" +
-                                        ",'" + dataDanhSachPhieuNhap.Rows[e.RowIndex].Cells["TenSanPham"].Value.ToString() + "'" +
+                                        ",N'" + dataDanhSachPhieuNhap.Rows[e.RowIndex].Cells["TenSanPham"].Value.ToString() + "'" +
                                         "," +0 +
                                          "," + 0 +
                                            "," +0 + ")";
@@ -236,10 +252,10 @@ namespace QUANLYKHO
                     SqlCommand cmd = con.CreateCommand();
                     cmd.CommandType = CommandType.Text;
                     cmd.CommandText = "UPDATE PhieuNhapKho set MaPhieuNhap ='" + maPhieuNhap.Text.ToString() + "'," +
-                        "TenNhanVien='" + tenNhanVien.Text.ToString() + "'," +
+                        "TenNhanVien=N'" + tenNhanVien.Text.ToString() + "'," +
                         "NgayNhapKho='" + ngayNhapKho.Value.Date.ToString("yyyyMMdd") + "'," +
                         "MaSanPham='" + dataDanhSachPhieuNhap.Rows[e.RowIndex].Cells["MaSanPham"].Value.ToString() + "'," +
-                        "TenSanPham='" + dataDanhSachPhieuNhap.Rows[e.RowIndex].Cells["TenSanPham"].Value.ToString() + "'," +
+                        "TenSanPham=N'" + dataDanhSachPhieuNhap.Rows[e.RowIndex].Cells["TenSanPham"].Value.ToString() + "'," +
                         "SoLuong=" + Convert.ToInt32(dataDanhSachPhieuNhap.Rows[e.RowIndex].Cells["SoLuong"].Value.ToString()) + "," +
                         "DonGia=" + Convert.ToInt32(dataDanhSachPhieuNhap.Rows[e.RowIndex].Cells["DonGia"].Value.ToString()) + "," +
                         "TongTien=" + Convert.ToInt32(dataDanhSachPhieuNhap.Rows[e.RowIndex].Cells["TongTien"].Value.ToString()) + " " +
@@ -264,6 +280,13 @@ namespace QUANLYKHO
                 this.contextMenuStrip1.Show(this.dataDanhSachPhieuNhap, e.Location);
                 contextMenuStrip1.Show(Cursor.Position);
             }
+        }
+
+        private void đơnHàngToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            FormDonHang fd = new FormDonHang();
+            fd.Show();
+            this.Hide();
         }
 
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)

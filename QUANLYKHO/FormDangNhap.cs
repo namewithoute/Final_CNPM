@@ -7,12 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using QUANLYKHO.CONTROLLER;
+using System.Data.SqlClient ;
 namespace QUANLYKHO
 {
     public partial class FormDangNhap : Form
     {
-        private PhieuNhapCONTROLLER phieunhap = new PhieuNhapCONTROLLER();
+        public static SqlConnection con = new SqlConnection(@"Data Source=DESKTOP-9GIEK94\SQL;Initial Catalog=QUANLYKHO;Integrated Security=True");
+
         public FormDangNhap()
         {
             InitializeComponent();
@@ -37,19 +38,37 @@ namespace QUANLYKHO
 
         private void button1_Click(object sender, EventArgs e)
         {
+            if (con.State == ConnectionState.Open)
+            {
+                con.Close();
+            }
+            con.Open();
             string taiKhoan = taiKhoan_text.Text;
             string matKhau = matKhau_text.Text;
-            DangNhapCONTROLLER getUser = new DangNhapCONTROLLER();
-            if (getUser.findUser(taiKhoan, matKhau) != null)
+
+            SqlCommand cmd = new SqlCommand();
+            int count = 0;
+            cmd.Connection = con;
+            cmd.CommandText = "SELECT *  FROM Account where TaiKhoan = '"+taiKhoan+"'";
+            SqlDataReader dr = cmd.ExecuteReader();
+            while (dr.Read())
+            {
+                count += 1;   
+            }
+            con.Close();
+
+            if (count != 0)
             {
                 FormDanhSachPhieuNhap dsPhieuNhap = new FormDanhSachPhieuNhap();
                 dsPhieuNhap.Show();
                 this.Hide();
             }
-            else 
+            else
             {
                 MessageBox.Show("Sai tài khoản hoặc mật khẩu");
+
             }
+
         }
     }
 }

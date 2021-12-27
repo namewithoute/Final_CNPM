@@ -3,12 +3,6 @@ C:\Users\LOVE\Desktop\CUOIKI_CNPM\QUANLYKHO\bin\Debug\QUANLYKHO.exe
 C:\Users\LOVE\Desktop\CUOIKI_CNPM\QUANLYKHO\bin\Debug\QUANLYKHO.pdb
 C:\Users\LOVE\Desktop\CUOIKI_CNPM\QUANLYKHO\bin\Debug\EntityFramework.dll
 C:\Users\LOVE\Desktop\CUOIKI_CNPM\QUANLYKHO\bin\Debug\EntityFramework.SqlServer.dll
-C:\Users\LOVE\Desktop\CUOIKI_CNPM\QUANLYKHO\bin\Debug\QUANLYKHO.CONTROLLER.dll
-C:\Users\LOVE\Desktop\CUOIKI_CNPM\QUANLYKHO\bin\Debug\QUANLYKHO.DTO.dll
-C:\Users\LOVE\Desktop\CUOIKI_CNPM\QUANLYKHO\bin\Debug\QUANLYKHO.MODEL.dll
-C:\Users\LOVE\Desktop\CUOIKI_CNPM\QUANLYKHO\bin\Debug\QUANLYKHO.CONTROLLER.pdb
-C:\Users\LOVE\Desktop\CUOIKI_CNPM\QUANLYKHO\bin\Debug\QUANLYKHO.DTO.pdb
-C:\Users\LOVE\Desktop\CUOIKI_CNPM\QUANLYKHO\bin\Debug\QUANLYKHO.MODEL.pdb
 C:\Users\LOVE\Desktop\CUOIKI_CNPM\QUANLYKHO\bin\Debug\EntityFramework.xml
 C:\Users\LOVE\Desktop\CUOIKI_CNPM\QUANLYKHO\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\LOVE\Desktop\CUOIKI_CNPM\QUANLYKHO\obj\Debug\QUANLYKHO.csproj.AssemblyReference.cache
@@ -23,3 +17,4 @@ C:\Users\LOVE\Desktop\CUOIKI_CNPM\QUANLYKHO\obj\Debug\QUANLYKHO.csproj.CopyCompl
 C:\Users\LOVE\Desktop\CUOIKI_CNPM\QUANLYKHO\obj\Debug\QUANLYKHO.exe
 C:\Users\LOVE\Desktop\CUOIKI_CNPM\QUANLYKHO\obj\Debug\QUANLYKHO.pdb
 C:\Users\LOVE\Desktop\CUOIKI_CNPM\QUANLYKHO\obj\Debug\QUANLYKHO.FormDanhSachPhieuXuat.resources
+C:\Users\LOVE\Desktop\CUOIKI_CNPM\QUANLYKHO\obj\Debug\QUANLYKHO.FormDonHang.resources
