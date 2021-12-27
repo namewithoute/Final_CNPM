@@ -1,6 +1,0 @@
-C:\Users\LOVE\Desktop\CUOIKI_CNPM\QUANLYKHO.DTO\bin\Debug\QUANLYKHO.DTO.dll
-C:\Users\LOVE\Desktop\CUOIKI_CNPM\QUANLYKHO.DTO\bin\Debug\QUANLYKHO.DTO.pdb
-C:\Users\LOVE\Desktop\CUOIKI_CNPM\QUANLYKHO.DTO\obj\Debug\QUANLYKHO.DTO.csproj.AssemblyReference.cache
-C:\Users\LOVE\Desktop\CUOIKI_CNPM\QUANLYKHO.DTO\obj\Debug\QUANLYKHO.DTO.csproj.CoreCompileInputs.cache
-C:\Users\LOVE\Desktop\CUOIKI_CNPM\QUANLYKHO.DTO\obj\Debug\QUANLYKHO.DTO.dll
-C:\Users\LOVE\Desktop\CUOIKI_CNPM\QUANLYKHO.DTO\obj\Debug\QUANLYKHO.DTO.pdb
