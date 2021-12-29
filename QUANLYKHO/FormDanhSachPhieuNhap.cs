@@ -289,6 +289,13 @@ namespace QUANLYKHO
             this.Hide();
         }
 
+        private void thốngKêToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormThongKe fm = new FormThongKe();
+            fm.Show();
+            this.Hide();
+        }
+
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SqlCommand cmd = con.CreateCommand();

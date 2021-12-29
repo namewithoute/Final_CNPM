@@ -60,6 +60,11 @@ namespace QUANLYKHO
             this.label8 = new System.Windows.Forms.Label();
             this.comboTTGiaoHang = new System.Windows.Forms.ComboBox();
             this.comboTTThanhToan = new System.Windows.Forms.ComboBox();
+            this.thốngKêToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.danhSáchPhiếuNhậpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.danhSáchPhiếuXuấtToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tạoPhiếuNhậpKhoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tạoPhiếuXuấtKhoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataDanhSachXuat)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
@@ -81,7 +86,8 @@ namespace QUANLYKHO
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.thôngTinToolStripMenuItem,
             this.thaoTácToolStripMenuItem,
-            this.đơnHàngToolStripMenuItem});
+            this.đơnHàngToolStripMenuItem,
+            this.thốngKêToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1016, 28);
@@ -90,12 +96,18 @@ namespace QUANLYKHO
             // 
             // thôngTinToolStripMenuItem
             // 
+            this.thôngTinToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.danhSáchPhiếuNhậpToolStripMenuItem,
+            this.danhSáchPhiếuXuấtToolStripMenuItem});
             this.thôngTinToolStripMenuItem.Name = "thôngTinToolStripMenuItem";
             this.thôngTinToolStripMenuItem.Size = new System.Drawing.Size(86, 24);
             this.thôngTinToolStripMenuItem.Text = "Thông tin";
             // 
             // thaoTácToolStripMenuItem
             // 
+            this.thaoTácToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tạoPhiếuNhậpKhoToolStripMenuItem,
+            this.tạoPhiếuXuấtKhoToolStripMenuItem});
             this.thaoTácToolStripMenuItem.Name = "thaoTácToolStripMenuItem";
             this.thaoTácToolStripMenuItem.Size = new System.Drawing.Size(80, 24);
             this.thaoTácToolStripMenuItem.Text = "Thao tác";
@@ -105,6 +117,7 @@ namespace QUANLYKHO
             this.đơnHàngToolStripMenuItem.Name = "đơnHàngToolStripMenuItem";
             this.đơnHàngToolStripMenuItem.Size = new System.Drawing.Size(88, 24);
             this.đơnHàngToolStripMenuItem.Text = "Đơn hàng";
+            this.đơnHàngToolStripMenuItem.Click += new System.EventHandler(this.đơnHàngToolStripMenuItem_Click);
             // 
             // label1
             // 
@@ -334,6 +347,41 @@ namespace QUANLYKHO
             this.comboTTThanhToan.TabIndex = 20;
             this.comboTTThanhToan.SelectedIndexChanged += new System.EventHandler(this.comboTTThanhToan_SelectedIndexChanged);
             // 
+            // thốngKêToolStripMenuItem
+            // 
+            this.thốngKêToolStripMenuItem.Name = "thốngKêToolStripMenuItem";
+            this.thốngKêToolStripMenuItem.Size = new System.Drawing.Size(84, 24);
+            this.thốngKêToolStripMenuItem.Text = "Thống kê";
+            this.thốngKêToolStripMenuItem.Click += new System.EventHandler(this.thốngKêToolStripMenuItem_Click);
+            // 
+            // danhSáchPhiếuNhậpToolStripMenuItem
+            // 
+            this.danhSáchPhiếuNhậpToolStripMenuItem.Name = "danhSáchPhiếuNhậpToolStripMenuItem";
+            this.danhSáchPhiếuNhậpToolStripMenuItem.Size = new System.Drawing.Size(242, 26);
+            this.danhSáchPhiếuNhậpToolStripMenuItem.Text = "Danh sách phiếu nhập ";
+            this.danhSáchPhiếuNhậpToolStripMenuItem.Click += new System.EventHandler(this.danhSáchPhiếuNhậpToolStripMenuItem_Click);
+            // 
+            // danhSáchPhiếuXuấtToolStripMenuItem
+            // 
+            this.danhSáchPhiếuXuấtToolStripMenuItem.Name = "danhSáchPhiếuXuấtToolStripMenuItem";
+            this.danhSáchPhiếuXuấtToolStripMenuItem.Size = new System.Drawing.Size(242, 26);
+            this.danhSáchPhiếuXuấtToolStripMenuItem.Text = "Danh sách phiếu xuất";
+            this.danhSáchPhiếuXuấtToolStripMenuItem.Click += new System.EventHandler(this.danhSáchPhiếuXuấtToolStripMenuItem_Click);
+            // 
+            // tạoPhiếuNhậpKhoToolStripMenuItem
+            // 
+            this.tạoPhiếuNhậpKhoToolStripMenuItem.Name = "tạoPhiếuNhậpKhoToolStripMenuItem";
+            this.tạoPhiếuNhậpKhoToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.tạoPhiếuNhậpKhoToolStripMenuItem.Text = "Tạo phiếu nhập kho";
+            this.tạoPhiếuNhậpKhoToolStripMenuItem.Click += new System.EventHandler(this.tạoPhiếuNhậpKhoToolStripMenuItem_Click);
+            // 
+            // tạoPhiếuXuấtKhoToolStripMenuItem
+            // 
+            this.tạoPhiếuXuấtKhoToolStripMenuItem.Name = "tạoPhiếuXuấtKhoToolStripMenuItem";
+            this.tạoPhiếuXuấtKhoToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.tạoPhiếuXuấtKhoToolStripMenuItem.Text = "Tạo phiếu xuất kho";
+            this.tạoPhiếuXuấtKhoToolStripMenuItem.Click += new System.EventHandler(this.tạoPhiếuXuấtKhoToolStripMenuItem_Click);
+            // 
             // FormDanhSachPhieuXuat
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -403,5 +451,10 @@ namespace QUANLYKHO
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ComboBox comboTTGiaoHang;
         private System.Windows.Forms.ComboBox comboTTThanhToan;
+        private System.Windows.Forms.ToolStripMenuItem danhSáchPhiếuNhậpToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem danhSáchPhiếuXuấtToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tạoPhiếuNhậpKhoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tạoPhiếuXuấtKhoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem thốngKêToolStripMenuItem;
     }
 }

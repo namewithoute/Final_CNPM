@@ -117,7 +117,7 @@ namespace QUANLYKHO
                     SqlCommand cmd = new SqlCommand(@"INSERT INTO PhieuXuatKho(MaPhieuXuat,TenNguoiNhan,SoDienThoai,DiaChi,NgayXuatKho,MaSanPham,TenSanPham,SoLuong,DonGia,TongTien,TTThanhToan,TTGiaoHang) values ('" + maDon.Text.ToString() + "'" +
                                             ",N'" + tenDaiLy.Text.ToString() + "','" +
                                              soDienThoai.Text.ToString() + "'" +
-                                             ",'" + diaChi.Text.ToString() + "'," +
+                                             ",N'" + diaChi.Text.ToString() + "'," +
                                              "'" + ngayDatHang.Value.Date.ToString("yyyyMMdd") + "'" +
                                             ",'" + dataDonHang.Rows[i].Cells["MaSanPham"].Value.ToString() + "'" +
                                             ",N'" + dataDonHang.Rows[i].Cells["TenSanPham"].Value.ToString() + "'" +
@@ -150,6 +150,39 @@ namespace QUANLYKHO
                 this.Close();
                 FormDonHang ds = new FormDonHang();
                 ds.Show();
+        }
+
+        private void danhSáchPhiếuNhậpKhoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormDanhSachPhieuNhap fn = new FormDanhSachPhieuNhap();
+            this.Hide();
+            fn.Show();
+        }
+
+        private void danhSáchPhiếuXuấtKhoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormDanhSachPhieuXuat fx = new FormDanhSachPhieuXuat();
+            fx.Show();
+            this.Hide();
+        }
+
+        private void tạoPhiếuNhậpKhoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormTaoPhieuNhap fnk = new FormTaoPhieuNhap();
+            fnk.Show();
+        }
+
+        private void tạoPhiếuXuấtKhoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormTaoPhieuXuat fxk = new FormTaoPhieuXuat();
+            fxk.Show();
+        }
+
+        private void thốngKêToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormThongKe fk = new FormThongKe();
+            fk.Show();
+            this.Hide();
         }
     }
 }

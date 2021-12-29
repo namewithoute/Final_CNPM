@@ -62,5 +62,17 @@ namespace QUANLYKHO
         {
 
         }
+
+        private void dsNhap_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex > -1)
+            {
+                if (dsNhap.Rows[e.RowIndex].Cells["SoLuong"].Value != null && dsNhap.Rows[e.RowIndex].Cells["DonGia"].Value != null)
+                {
+                    dsNhap.Rows[e.RowIndex].Cells["TongTien"].Value = Convert.ToInt32(dsNhap.Rows[e.RowIndex].Cells["SoLuong"].Value.ToString()) * Convert.ToInt32(dsNhap.Rows[e.RowIndex].Cells["DonGia"].Value);
+                }
+
+            }
+        }
     }
 }

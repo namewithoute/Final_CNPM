@@ -36,12 +36,12 @@ namespace QUANLYKHO
             this.tenNhanVien = new System.Windows.Forms.TextBox();
             this.ngayNhapKho = new System.Windows.Forms.DateTimePicker();
             this.dsNhap = new System.Windows.Forms.DataGridView();
-            this.button1 = new System.Windows.Forms.Button();
             this.MaSanPham = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TenSanPham = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SoLuong = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DonGia = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TongTien = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dsNhap)).BeginInit();
             this.SuspendLayout();
             // 
@@ -131,19 +131,7 @@ namespace QUANLYKHO
             this.dsNhap.Size = new System.Drawing.Size(709, 184);
             this.dsNhap.TabIndex = 6;
             this.dsNhap.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
-            // 
-            // button1
-            // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(704, 435);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(128, 45);
-            this.button1.TabIndex = 7;
-            this.button1.Text = "Xác nhận";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.dsNhap.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dsNhap_CellValueChanged);
             // 
             // MaSanPham
             // 
@@ -179,6 +167,19 @@ namespace QUANLYKHO
             this.TongTien.MinimumWidth = 6;
             this.TongTien.Name = "TongTien";
             this.TongTien.Width = 125;
+            // 
+            // button1
+            // 
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.button1.Location = new System.Drawing.Point(704, 435);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(128, 45);
+            this.button1.TabIndex = 7;
+            this.button1.Text = "Xác nhận";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // FormTaoPhieuNhap
             // 

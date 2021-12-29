@@ -261,6 +261,45 @@ namespace QUANLYKHO
 
         }
 
+        private void danhSáchPhiếuNhậpToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormDanhSachPhieuNhap fn = new FormDanhSachPhieuNhap();
+            fn.Show();
+            this.Hide();
+        }
+
+        private void danhSáchPhiếuXuấtToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void tạoPhiếuNhậpKhoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormTaoPhieuNhap fnk = new FormTaoPhieuNhap();
+            fnk.Show();
+        }
+
+        private void tạoPhiếuXuấtKhoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormTaoPhieuXuat fxk = new FormTaoPhieuXuat();
+            fxk.Show();
+            this.Hide();
+        }
+
+        private void đơnHàngToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormDonHang dh = new FormDonHang();
+            dh.Show();
+            this.Hide();
+        }
+
+        private void thốngKêToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormThongKe tk = new FormThongKe();
+            this.Hide();
+            tk.Show();
+        }
+
         private void dataDanhSachXuat_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
 
@@ -303,12 +342,13 @@ namespace QUANLYKHO
                 }
                 else
                 {
+                  
                     SqlCommand cmd = con.CreateCommand();
                     cmd.CommandType = CommandType.Text;
                     cmd.CommandText = "UPDATE PhieuXuatKho set MaPhieuXuat ='" + maPhieuXuat.Text.ToString() + "'," +
-                        "TenNguoiNhan='" + tenNguoiNhan.Text.ToString() + "'," +
+                        "TenNguoiNhan=N'" + tenNguoiNhan.Text.ToString() + "'," +
                         "SoDienThoai='" + soDienThoai.Text.ToString() + "'," +
-                        "DiaChi='" + diaChi.Text.ToString() + "'," +
+                        "DiaChi=N'" + diaChi.Text.ToString() + "'," +
                         "NgayXuatKho='" + ngayXuatKho.Value.Date.ToString("yyyyMMdd") + "'," +
                         "MaSanPham='" + dataDanhSachXuat.Rows[e.RowIndex].Cells["MaSanPham"].Value.ToString() + "'," +
                         "TenSanPham=N'" + Convert.ToString((dataDanhSachXuat.Rows[e.RowIndex].Cells["TenSanPham"] as DataGridViewComboBoxCell).FormattedValue.ToString()) + "'," +

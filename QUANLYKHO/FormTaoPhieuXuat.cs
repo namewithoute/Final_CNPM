@@ -26,6 +26,7 @@ namespace QUANLYKHO
             }
             else
             {
+               
                 for (int i = 0; i < (dataTaoPhieuXuat.Rows.Count - 1); i++)
                 {
                     SqlCommand cmd = new SqlCommand(@"INSERT INTO PhieuXuatKho(MaPhieuXuat,TenNguoiNhan,SoDienThoai,DiaChi,NgayXuatKho,MaSanPham,TenSanPham,SoLuong,DonGia,TongTien,TTThanhToan,TTGiaoHang) values ('" + maPhieuXuat.Text.ToString() + "'" +
@@ -83,5 +84,19 @@ namespace QUANLYKHO
             TenSanPham.DisplayMember = "TenSanPham";
             TenSanPham.DataSource = dt;
         }
+
+        private void dataTaoPhieuXuat_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex > -1)
+            {
+                if (dataTaoPhieuXuat.Rows[e.RowIndex].Cells["SoLuong"].Value != null && dataTaoPhieuXuat.Rows[e.RowIndex].Cells["DonGia"].Value != null)
+                {
+                    dataTaoPhieuXuat.Rows[e.RowIndex].Cells["TongTien"].Value = Convert.ToInt32(dataTaoPhieuXuat.Rows[e.RowIndex].Cells["SoLuong"].Value.ToString()) * Convert.ToInt32(dataTaoPhieuXuat.Rows[e.RowIndex].Cells["DonGia"].Value);
+                }
+               
+            }
+            
+        }
+   
     }
 }

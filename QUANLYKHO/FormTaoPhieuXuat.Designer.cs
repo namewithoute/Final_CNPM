@@ -147,6 +147,7 @@ namespace QUANLYKHO
             this.dataTaoPhieuXuat.RowTemplate.Height = 24;
             this.dataTaoPhieuXuat.Size = new System.Drawing.Size(768, 185);
             this.dataTaoPhieuXuat.TabIndex = 10;
+            this.dataTaoPhieuXuat.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataTaoPhieuXuat_CellValueChanged);
             // 
             // STTSanPhamXuat
             // 
