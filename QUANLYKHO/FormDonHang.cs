@@ -21,13 +21,19 @@ namespace QUANLYKHO
 
         private void FormDonHang_Load(object sender, EventArgs e)
         {
-
+            
             fillListBox();
-            dsMaDon.SelectedIndex = 0;
-            string curItem = dsMaDon.SelectedItem.ToString();
-            fillGrid(curItem);
-            getInfo(curItem);
-
+            if (dsMaDon.Items.Count > 0)
+            {
+                dsMaDon.SelectedIndex = 0;
+                string curItem = dsMaDon.SelectedItem.ToString();
+                fillGrid(curItem);
+                getInfo(curItem);
+            }
+            else
+            {
+                MessageBox.Show("Danh sách đơn hàng đặt trực tuyến đang trống");
+            }
         }
         private void fillListBox()
         {

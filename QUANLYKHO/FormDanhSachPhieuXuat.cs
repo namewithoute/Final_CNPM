@@ -228,7 +228,7 @@ namespace QUANLYKHO
 
             SqlCommand cmd = con.CreateCommand();
             cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "UPDATE PhieuXuatKho set TTGiaoHang = '" + comboTTGiaoHang.SelectedItem.ToString() + "' where MaPhieuXuat ='" + curItem +"'";
+            cmd.CommandText = "UPDATE PhieuXuatKho set TTGiaoHang = N'" + comboTTGiaoHang.SelectedItem.ToString() + "' where MaPhieuXuat ='" + curItem +"'";
             cmd.ExecuteNonQuery();
             fillCombo();
             fillGrid(curItem);
@@ -254,7 +254,7 @@ namespace QUANLYKHO
 
             SqlCommand cmd = con.CreateCommand();
             cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "UPDATE PhieuXuatKho set TTThanhToan = '" + comboTTThanhToan.SelectedItem.ToString() + "' where MaPhieuXuat ='" + curItem + "'";
+            cmd.CommandText = "UPDATE PhieuXuatKho set TTThanhToan = N'" + comboTTThanhToan.SelectedItem.ToString() + "' where MaPhieuXuat ='" + curItem + "'";
             cmd.ExecuteNonQuery();
             fillCombo();
             fillGrid(curItem);
@@ -326,7 +326,7 @@ namespace QUANLYKHO
                     cmd.CommandText = "INSERT INTO PhieuXuatKho(MaPhieuXuat,TenNguoiNhan,SoDienThoai,DiaChi,NgayXuatKho,MaSanPham,TenSanPham,SoLuong, DonGia,TongTien) values ('" + maPhieuXuat.Text.ToString() + "'" +
                                     ",N'" + tenNguoiNhan.Text.ToString() + "','" +
                                      soDienThoai.Text.ToString() + "'" +
-                                    ",'" + diaChi.Text.ToString() + "'" +
+                                    ",N'" + diaChi.Text.ToString() + "'" +
                                     ",'" + ngayXuatKho.Value.Date.ToString("yyyyMMdd") + "'" +
                                     ",'" + dataDanhSachXuat.Rows[e.RowIndex].Cells["MaSanPham"].Value.ToString() +
                                      "',N'" + Convert.ToString((dataDanhSachXuat.Rows[e.RowIndex].Cells["TenSanPham"] as DataGridViewComboBoxCell).FormattedValue.ToString()) +

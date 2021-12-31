@@ -32,7 +32,7 @@ namespace QUANLYKHO
                     SqlCommand cmd = new SqlCommand(@"INSERT INTO PhieuXuatKho(MaPhieuXuat,TenNguoiNhan,SoDienThoai,DiaChi,NgayXuatKho,MaSanPham,TenSanPham,SoLuong,DonGia,TongTien,TTThanhToan,TTGiaoHang) values ('" + maPhieuXuat.Text.ToString() + "'" +
                                             ",N'" + tenNguoiNhan.Text.ToString() + "','" +
                                              soDienThoai.Text.ToString() + "'" +
-                                             ",'" + diaChi.Text.ToString() + "'," +
+                                             ",N'" + diaChi.Text.ToString() + "'," +
                                              "'" + ngayXuat.Value.Date.ToString("yyyyMMdd") + "'" +
                                             ",'" + dataTaoPhieuXuat.Rows[i].Cells["MaSanPham"].Value.ToString() + "'" +
                                             ",N'" + dataTaoPhieuXuat.Rows[i].Cells["TenSanPham"].Value.ToString() + "'" +
@@ -87,16 +87,31 @@ namespace QUANLYKHO
 
         private void dataTaoPhieuXuat_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
+
             if (e.RowIndex > -1)
             {
                 if (dataTaoPhieuXuat.Rows[e.RowIndex].Cells["SoLuong"].Value != null && dataTaoPhieuXuat.Rows[e.RowIndex].Cells["DonGia"].Value != null)
                 {
-                    dataTaoPhieuXuat.Rows[e.RowIndex].Cells["TongTien"].Value = Convert.ToInt32(dataTaoPhieuXuat.Rows[e.RowIndex].Cells["SoLuong"].Value.ToString()) * Convert.ToInt32(dataTaoPhieuXuat.Rows[e.RowIndex].Cells["DonGia"].Value);
+                    if (IsValidDecimalNumber(dataTaoPhieuXuat.Rows[e.RowIndex].Cells["DonGia"].Value.ToString()).ToString() == "False" || IsValidDecimalNumber(dataTaoPhieuXuat.Rows[e.RowIndex].Cells["SoLuong"].Value.ToString()).ToString() == "False")
+                    {
+                        MessageBox.Show("Xin nhập số ở đơn giá và số lượng");
+                        dataTaoPhieuXuat.Refresh();
+                    }
+                    else
+                    {
+                        dataTaoPhieuXuat.Rows[e.RowIndex].Cells["TongTien"].Value = Convert.ToInt32(dataTaoPhieuXuat.Rows[e.RowIndex].Cells["SoLuong"].Value.ToString()) * Convert.ToInt32(dataTaoPhieuXuat.Rows[e.RowIndex].Cells["DonGia"].Value.ToString());
+                    }
                 }
-               
             }
-            
+
         }
-   
+
+        private bool IsValidDecimalNumber(string s)
+        {
+            if (string.IsNullOrWhiteSpace(s)) return false; //blank/null strings aren't valid decimal numbers
+            return !s.Any(c => !(char.IsDigit(c) || c == '.')) && !(s.Count(c => c == '.') > 1);
+        }
+
+
     }
 }
