@@ -300,6 +300,11 @@ namespace QUANLYKHO
             tk.Show();
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void dataDanhSachXuat_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
 

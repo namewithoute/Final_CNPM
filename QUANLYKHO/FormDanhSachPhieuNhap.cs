@@ -66,11 +66,12 @@ namespace QUANLYKHO
             SqlCommand cmd = new SqlCommand();
 
             cmd.Connection = con;
-            cmd.CommandText = "SELECT DISTINCT TenNhanVien FROM PhieuNhapKho where MaPhieuNhap ='" + mpx+"'";
+            cmd.CommandText = "SELECT DISTINCT TenNhanVien,NgayNhapKho FROM PhieuNhapKho where MaPhieuNhap ='" + mpx+"'";
             SqlDataReader dr = cmd.ExecuteReader();
             while (dr.Read())
             {
                 tenNhanVien.Text = dr.GetString(0);
+                ngayNhapKho.Value = dr.GetDateTime(1); 
             }
             con.Close();
         }
