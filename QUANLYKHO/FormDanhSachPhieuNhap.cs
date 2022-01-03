@@ -23,12 +23,12 @@ namespace QUANLYKHO
         {
             InitializeComponent();
         }
-        
+
 
 
         private void FormDanhSachPhieuNhap_Load(object sender, EventArgs e)
         {
-            if(con.State == ConnectionState.Open)
+            if (con.State == ConnectionState.Open)
             {
                 con.Close();
             }
@@ -66,12 +66,12 @@ namespace QUANLYKHO
             SqlCommand cmd = new SqlCommand();
 
             cmd.Connection = con;
-            cmd.CommandText = "SELECT DISTINCT TenNhanVien,NgayNhapKho FROM PhieuNhapKho where MaPhieuNhap ='" + mpx+"'";
+            cmd.CommandText = "SELECT DISTINCT TenNhanVien,NgayNhapKho FROM PhieuNhapKho where MaPhieuNhap ='" + mpx + "'";
             SqlDataReader dr = cmd.ExecuteReader();
             while (dr.Read())
             {
                 tenNhanVien.Text = dr.GetString(0);
-                ngayNhapKho.Value = dr.GetDateTime(1); 
+                ngayNhapKho.Value = dr.GetDateTime(1);
             }
             con.Close();
         }
@@ -86,7 +86,7 @@ namespace QUANLYKHO
             con.Open();
             SqlCommand cmd = con.CreateCommand();
             cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "SELECT STTSanPham, MaSanPham,TenSanpham, SoLuong,DonGia,TongTien FROM PhieuNhapKho where MaPhieuNhap = '"+ mpn+ "'";
+            cmd.CommandText = "SELECT STTSanPham, MaSanPham,TenSanpham, SoLuong,DonGia,TongTien FROM PhieuNhapKho where MaPhieuNhap = '" + mpn + "'";
             cmd.ExecuteNonQuery();
             DataTable dt = new DataTable();
             SqlDataAdapter da = new SqlDataAdapter(cmd);
@@ -139,7 +139,7 @@ namespace QUANLYKHO
 
         }
 
-      
+
         private void danhSáchPhiếuNhậpKhoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (this.Name == "FormDanhSachPhieuNhap") { }
@@ -163,7 +163,7 @@ namespace QUANLYKHO
 
         private void tạoPhiếuNhậpKhoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-           
+
             FormTaoPhieuNhap taoPhieuNhap = new FormTaoPhieuNhap();
             taoPhieuNhap.ShowDialog();
             this.Hide();
@@ -199,11 +199,11 @@ namespace QUANLYKHO
             {
             }
 
-           
-        }
-     
 
-      
+        }
+
+
+
 
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
@@ -214,9 +214,9 @@ namespace QUANLYKHO
         {
             if (e.RowIndex > -1)
             {
-                
-                    id = dataDanhSachPhieuNhap.Rows[e.RowIndex].Cells["STTSanPham"].Value.ToString();
-              
+
+                id = dataDanhSachPhieuNhap.Rows[e.RowIndex].Cells["STTSanPham"].Value.ToString();
+
 
                 if (id == "")
                 {
@@ -231,21 +231,21 @@ namespace QUANLYKHO
                 {
 
                     SqlCommand cmd = con.CreateCommand();
-                        cmd.CommandType = CommandType.Text;
-                        cmd.CommandText = "INSERT INTO PhieuNhapKho(MaPhieuNhap,TenNhanVien,NgayNhapKho,MaSanPham,TenSanPham,SoLuong,DonGia,TongTien) values ('" + maPhieuNhap.Text.ToString() + "'" +
-                                        ",N'" + tenNhanVien.Text.ToString() + "','" +
-                                         ngayNhapKho.Value.Date.ToString("yyyyMMdd") + "'" +
-                                        ",'" + dataDanhSachPhieuNhap.Rows[e.RowIndex].Cells["MaSanPham"].Value.ToString() + "'" +
-                                        ",N'" + dataDanhSachPhieuNhap.Rows[e.RowIndex].Cells["TenSanPham"].Value.ToString() + "'" +
-                                        "," +0 +
-                                         "," + 0 +
-                                           "," +0 + ")";
-                         cmd.ExecuteNonQuery();
-                        string curItem = ds_phieunhap.SelectedItem.ToString();
+                    cmd.CommandType = CommandType.Text;
+                    cmd.CommandText = "INSERT INTO PhieuNhapKho(MaPhieuNhap,TenNhanVien,NgayNhapKho,MaSanPham,TenSanPham,SoLuong,DonGia,TongTien) values ('" + maPhieuNhap.Text.ToString() + "'" +
+                                    ",N'" + tenNhanVien.Text.ToString() + "','" +
+                                     ngayNhapKho.Value.Date.ToString("yyyyMMdd") + "'" +
+                                    ",'" + dataDanhSachPhieuNhap.Rows[e.RowIndex].Cells["MaSanPham"].Value.ToString() + "'" +
+                                    ",N'" + dataDanhSachPhieuNhap.Rows[e.RowIndex].Cells["TenSanPham"].Value.ToString() + "'" +
+                                    "," + 0 +
+                                     "," + 0 +
+                                       "," + 0 + ")";
+                    cmd.ExecuteNonQuery();
+                    string curItem = ds_phieunhap.SelectedItem.ToString();
 
-                        fill_grid(curItem);
+                    fill_grid(curItem);
 
-                    
+
 
                 }
                 else
@@ -260,7 +260,7 @@ namespace QUANLYKHO
                         "SoLuong=" + Convert.ToInt32(dataDanhSachPhieuNhap.Rows[e.RowIndex].Cells["SoLuong"].Value.ToString()) + "," +
                         "DonGia=" + Convert.ToInt32(dataDanhSachPhieuNhap.Rows[e.RowIndex].Cells["DonGia"].Value.ToString()) + "," +
                         "TongTien=" + Convert.ToInt32(dataDanhSachPhieuNhap.Rows[e.RowIndex].Cells["TongTien"].Value.ToString()) + " " +
-                        "Where STTSanPham = "+ id1 +"";
+                        "Where STTSanPham = " + id1 + "";
 
                     cmd.ExecuteNonQuery();
                     string curItem = ds_phieunhap.SelectedItem.ToString();
@@ -300,9 +300,9 @@ namespace QUANLYKHO
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SqlCommand cmd = con.CreateCommand();
-            
+
             cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "DELETE FROM PhieuNhapKho where STTSanPham = " + delete_id+"";
+            cmd.CommandText = "DELETE FROM PhieuNhapKho where STTSanPham = " + delete_id + "";
             cmd.ExecuteNonQuery();
             string curItem = ds_phieunhap.SelectedItem.ToString();
 
@@ -310,10 +310,10 @@ namespace QUANLYKHO
 
         }
 
-      
 
-    
 
-       
+
+
+
     }
 }

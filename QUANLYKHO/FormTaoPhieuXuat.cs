@@ -20,13 +20,13 @@ namespace QUANLYKHO
 
         private void btnXacNhan_Click(object sender, EventArgs e)
         {
-            if (maPhieuXuat.Text.ToString() == "" || tenNguoiNhan.Text.ToString() == "" || soDienThoai.Text.ToString() == "" || diaChi.Text.ToString() == ""|| dataTaoPhieuXuat.Rows[0].Cells["MaSanPham"].Value.ToString()==""|| dataTaoPhieuXuat.Rows[0].Cells["TenSanPham"].Value.ToString()==""|| dataTaoPhieuXuat.Rows[0].Cells["SoLuong"].Value.ToString()=="")
+            if (maPhieuXuat.Text.ToString() == "" || tenNguoiNhan.Text.ToString() == "" || soDienThoai.Text.ToString() == "" || diaChi.Text.ToString() == "" || dataTaoPhieuXuat.Rows[0].Cells["MaSanPham"].Value.ToString() == "" || dataTaoPhieuXuat.Rows[0].Cells["TenSanPham"].Value.ToString() == "" || dataTaoPhieuXuat.Rows[0].Cells["SoLuong"].Value.ToString() == "")
             {
                 MessageBox.Show("Vui lòng không để trống");
             }
             else
             {
-               
+
                 for (int i = 0; i < (dataTaoPhieuXuat.Rows.Count - 1); i++)
                 {
                     SqlCommand cmd = new SqlCommand(@"INSERT INTO PhieuXuatKho(MaPhieuXuat,TenNguoiNhan,SoDienThoai,DiaChi,NgayXuatKho,MaSanPham,TenSanPham,SoLuong,DonGia,TongTien,TTThanhToan,TTGiaoHang) values ('" + maPhieuXuat.Text.ToString() + "'" +
@@ -38,9 +38,9 @@ namespace QUANLYKHO
                                             ",N'" + dataTaoPhieuXuat.Rows[i].Cells["TenSanPham"].Value.ToString() + "'" +
                                             "," + Convert.ToInt32(dataTaoPhieuXuat.Rows[i].Cells["SoLuong"].Value.ToString()) +
                                              "," + Convert.ToInt32(dataTaoPhieuXuat.Rows[i].Cells["DonGia"].Value.ToString()) +
-                                               "," + Convert.ToInt32(dataTaoPhieuXuat.Rows[i].Cells["TongTien"].Value.ToString()) + ",N'"+
-                                                comboTTTT.SelectedItem.ToString() +"',N'"+
-                                                 comboTTGH.SelectedItem.ToString()+"')", sqlCon);
+                                               "," + Convert.ToInt32(dataTaoPhieuXuat.Rows[i].Cells["TongTien"].Value.ToString()) + ",N'" +
+                                                comboTTTT.SelectedItem.ToString() + "',N'" +
+                                                 comboTTGH.SelectedItem.ToString() + "')", sqlCon);
                     if (sqlCon.State == ConnectionState.Open)
                     {
                         sqlCon.Close();
@@ -92,21 +92,37 @@ namespace QUANLYKHO
             {
                 if (dataTaoPhieuXuat.Rows[e.RowIndex].Cells["SoLuong"].Value != null && dataTaoPhieuXuat.Rows[e.RowIndex].Cells["DonGia"].Value != null)
                 {
-                    if (IsValidDecimalNumber(dataTaoPhieuXuat.Rows[e.RowIndex].Cells["DonGia"].Value.ToString()).ToString() == "False" || IsValidDecimalNumber(dataTaoPhieuXuat.Rows[e.RowIndex].Cells["SoLuong"].Value.ToString()).ToString() == "False")
+                    if (kiemTraDauVaoXuat(dataTaoPhieuXuat.Rows[e.RowIndex].Cells["Soluong"].Value.ToString(), dataTaoPhieuXuat.Rows[e.RowIndex].Cells["DonGia"].Value.ToString()))
                     {
-                        MessageBox.Show("Xin nhập số ở đơn giá và số lượng");
-                        dataTaoPhieuXuat.Refresh();
+                        dataTaoPhieuXuat.Rows[e.RowIndex].Cells["TongTien"].Value = Convert.ToInt32(dataTaoPhieuXuat.Rows[e.RowIndex].Cells["SoLuong"].Value.ToString()) * Convert.ToInt32(dataTaoPhieuXuat.Rows[e.RowIndex].Cells["DonGia"].Value.ToString());
+
                     }
                     else
                     {
-                        dataTaoPhieuXuat.Rows[e.RowIndex].Cells["TongTien"].Value = Convert.ToInt32(dataTaoPhieuXuat.Rows[e.RowIndex].Cells["SoLuong"].Value.ToString()) * Convert.ToInt32(dataTaoPhieuXuat.Rows[e.RowIndex].Cells["DonGia"].Value.ToString());
+                        MessageBox.Show("Vui lòng nhập số ở số lượng và đơn giá");
+                        dataTaoPhieuXuat.Refresh();
+
                     }
                 }
             }
 
         }
 
-        private bool IsValidDecimalNumber(string s)
+
+        public bool kiemTraDauVaoXuat(string soluong, string dongia)
+        {
+            if (IsValidDecimalNumber(soluong).ToString() == "False" || IsValidDecimalNumber(dongia.ToString()).ToString() == "False")
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+
+        }
+
+        public bool IsValidDecimalNumber(string s)
         {
             if (string.IsNullOrWhiteSpace(s)) return false; //blank/null strings aren't valid decimal numbers
             return !s.Any(c => !(char.IsDigit(c) || c == '.')) && !(s.Count(c => c == '.') > 1);

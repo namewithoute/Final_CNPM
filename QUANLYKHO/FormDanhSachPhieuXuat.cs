@@ -67,7 +67,7 @@ namespace QUANLYKHO
             DataTable dt = new DataTable();
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             da.Fill(dt);
-           
+
             dataDanhSachXuat.DataSource = dt;
         }
 
@@ -97,7 +97,7 @@ namespace QUANLYKHO
 
         private void FormDanhSachPhieuXuat_Load(object sender, EventArgs e)
         {
-        
+
             fillListBox();
             dsMaXuat.SelectedIndex = 0;
             string curItem = dsMaXuat.SelectedItem.ToString();
@@ -115,7 +115,7 @@ namespace QUANLYKHO
 
         private void dataDanhSachXuat_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
-         
+
         }
 
         private void dsMaXuat_SelectedIndexChanged(object sender, EventArgs e)
@@ -141,7 +141,7 @@ namespace QUANLYKHO
             con.Open();
             cmd.Connection = con;
 
-            cmd.CommandText = "SELECT DISTINCT MaPhieuXuat,TenNguoiNhan,SoDienThoai,DiaChi,NgayXuatKho,TTGiaoHang,TTThanhToan FROM PhieuXuatKho where MaPhieuXuat = '"+mpx+"'";
+            cmd.CommandText = "SELECT DISTINCT MaPhieuXuat,TenNguoiNhan,SoDienThoai,DiaChi,NgayXuatKho,TTGiaoHang,TTThanhToan FROM PhieuXuatKho where MaPhieuXuat = '" + mpx + "'";
             da.SelectCommand = cmd;
             da.Fill(dt);
             if (dt.Rows.Count > 0)
@@ -160,7 +160,7 @@ namespace QUANLYKHO
 
             string curItem = dsMaXuat.SelectedItem.ToString();
             fillGrid(curItem);
-            }
+        }
 
         private void btnXoaPhieu_Click(object sender, EventArgs e)
         {
@@ -228,7 +228,7 @@ namespace QUANLYKHO
 
             SqlCommand cmd = con.CreateCommand();
             cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "UPDATE PhieuXuatKho set TTGiaoHang = N'" + comboTTGiaoHang.SelectedItem.ToString() + "' where MaPhieuXuat ='" + curItem +"'";
+            cmd.CommandText = "UPDATE PhieuXuatKho set TTGiaoHang = N'" + comboTTGiaoHang.SelectedItem.ToString() + "' where MaPhieuXuat ='" + curItem + "'";
             cmd.ExecuteNonQuery();
             fillCombo();
             fillGrid(curItem);
@@ -270,7 +270,7 @@ namespace QUANLYKHO
 
         private void danhSáchPhiếuXuấtToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void tạoPhiếuNhậpKhoToolStripMenuItem_Click(object sender, EventArgs e)
@@ -302,7 +302,7 @@ namespace QUANLYKHO
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            
         }
 
         private void dataDanhSachXuat_CellValueChanged(object sender, DataGridViewCellEventArgs e)
@@ -335,9 +335,9 @@ namespace QUANLYKHO
                                     ",'" + ngayXuatKho.Value.Date.ToString("yyyyMMdd") + "'" +
                                     ",'" + dataDanhSachXuat.Rows[e.RowIndex].Cells["MaSanPham"].Value.ToString() +
                                      "',N'" + Convert.ToString((dataDanhSachXuat.Rows[e.RowIndex].Cells["TenSanPham"] as DataGridViewComboBoxCell).FormattedValue.ToString()) +
-                                       "'," +0 +
+                                       "'," + 0 +
                                         "," + 0 +
-                                         "," +0 + ")";
+                                         "," + 0 + ")";
                     cmd.ExecuteNonQuery();
                     string curItem = dsMaXuat.SelectedItem.ToString();
                     fillGrid(curItem);
@@ -347,7 +347,7 @@ namespace QUANLYKHO
                 }
                 else
                 {
-                  
+
                     SqlCommand cmd = con.CreateCommand();
                     cmd.CommandType = CommandType.Text;
                     cmd.CommandText = "UPDATE PhieuXuatKho set MaPhieuXuat ='" + maPhieuXuat.Text.ToString() + "'," +
@@ -360,7 +360,7 @@ namespace QUANLYKHO
                         "SoLuong=" + Convert.ToInt32(dataDanhSachXuat.Rows[e.RowIndex].Cells["SoLuong"].Value.ToString()) + "," +
                          "DonGia=" + Convert.ToInt32(dataDanhSachXuat.Rows[e.RowIndex].Cells["DonGia"].Value.ToString()) + "," +
                          "TongTien=" + Convert.ToInt32(dataDanhSachXuat.Rows[e.RowIndex].Cells["TongTien"].Value.ToString()) + "" +
-                        
+
 
                         "Where STTSanPhamXuat = " + id1 + "";
 

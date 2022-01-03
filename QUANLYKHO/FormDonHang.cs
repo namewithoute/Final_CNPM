@@ -21,7 +21,7 @@ namespace QUANLYKHO
 
         private void FormDonHang_Load(object sender, EventArgs e)
         {
-            
+
             fillListBox();
             if (dsMaDon.Items.Count > 0)
             {
@@ -119,17 +119,17 @@ namespace QUANLYKHO
             string curItem = dsMaDon.SelectedItem.ToString();
 
             for (int i = 0; i < (dataDonHang.Rows.Count - 1); i++)
-                {
-                    SqlCommand cmd = new SqlCommand(@"INSERT INTO PhieuXuatKho(MaPhieuXuat,TenNguoiNhan,SoDienThoai,DiaChi,NgayXuatKho,MaSanPham,TenSanPham,SoLuong,DonGia,TongTien,TTThanhToan,TTGiaoHang) values ('" + maDon.Text.ToString() + "'" +
-                                            ",N'" + tenDaiLy.Text.ToString() + "','" +
-                                             soDienThoai.Text.ToString() + "'" +
-                                             ",N'" + diaChi.Text.ToString() + "'," +
-                                             "'" + ngayDatHang.Value.Date.ToString("yyyyMMdd") + "'" +
-                                            ",'" + dataDonHang.Rows[i].Cells["MaSanPham"].Value.ToString() + "'" +
-                                            ",N'" + dataDonHang.Rows[i].Cells["TenSanPham"].Value.ToString() + "'" +
-                                            "," + Convert.ToInt32(dataDonHang.Rows[i].Cells["SoLuong"].Value.ToString()) +
-                                             "," + Convert.ToInt32(dataDonHang.Rows[i].Cells["DonGia"].Value.ToString()) +
-                                               "," + Convert.ToInt32(dataDonHang.Rows[i].Cells["TongTien"].Value.ToString()) + ",N'Chưa thanh toán',N'Đang xử lý')" ,con);
+            {
+                SqlCommand cmd = new SqlCommand(@"INSERT INTO PhieuXuatKho(MaPhieuXuat,TenNguoiNhan,SoDienThoai,DiaChi,NgayXuatKho,MaSanPham,TenSanPham,SoLuong,DonGia,TongTien,TTThanhToan,TTGiaoHang) values ('" + maDon.Text.ToString() + "'" +
+                                        ",N'" + tenDaiLy.Text.ToString() + "','" +
+                                         soDienThoai.Text.ToString() + "'" +
+                                         ",N'" + diaChi.Text.ToString() + "'," +
+                                         "'" + ngayDatHang.Value.Date.ToString("yyyyMMdd") + "'" +
+                                        ",'" + dataDonHang.Rows[i].Cells["MaSanPham"].Value.ToString() + "'" +
+                                        ",N'" + dataDonHang.Rows[i].Cells["TenSanPham"].Value.ToString() + "'" +
+                                        "," + Convert.ToInt32(dataDonHang.Rows[i].Cells["SoLuong"].Value.ToString()) +
+                                         "," + Convert.ToInt32(dataDonHang.Rows[i].Cells["DonGia"].Value.ToString()) +
+                                           "," + Convert.ToInt32(dataDonHang.Rows[i].Cells["TongTien"].Value.ToString()) + ",N'Chưa thanh toán',N'Đang xử lý')", con);
 
                 SqlCommand cmd2 = con.CreateCommand();
 
@@ -138,24 +138,24 @@ namespace QUANLYKHO
 
 
                 if (con.State == ConnectionState.Open)
-                    {
-                        con.Close();
-                    }
-
-                    con.Open();
-                    cmd.ExecuteNonQuery();
-                    cmd2.ExecuteNonQuery();
-
-                con.Close();
+                {
+                    con.Close();
                 }
 
-    
+                con.Open();
+                cmd.ExecuteNonQuery();
+                cmd2.ExecuteNonQuery();
 
-           
+                con.Close();
+            }
+
+
+
+
             MessageBox.Show("Thêm thành công!");
-                this.Close();
-                FormDonHang ds = new FormDonHang();
-                ds.Show();
+            this.Close();
+            FormDonHang ds = new FormDonHang();
+            ds.Show();
         }
 
         private void danhSáchPhiếuNhậpKhoToolStripMenuItem_Click(object sender, EventArgs e)

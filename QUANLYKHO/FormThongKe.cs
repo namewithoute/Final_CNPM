@@ -31,7 +31,7 @@ namespace QUANLYKHO
             ngayThongKe.ShowUpDown = true;
         }
 
-       private void fillDSNhap(string ngaynhap)
+        private void fillDSNhap(string ngaynhap)
         {
             if (con.State == ConnectionState.Open)
             {
@@ -40,22 +40,22 @@ namespace QUANLYKHO
             con.Open();
             SqlCommand cmd = con.CreateCommand();
             cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "SELECT MaSanPham AS MaSanPhamNhap,TenSanPham AS TenSanPhamNhap, SoLuong AS SoLuongNhap, DonGia AS DonGiaNhap, TongTien AS TongTienNhap FROM PhieuNhapKho where NgayNhapkho like '%"+ngaynhap+"%'" ;
+            cmd.CommandText = "SELECT MaSanPham AS MaSanPhamNhap,TenSanPham AS TenSanPhamNhap, SoLuong AS SoLuongNhap, DonGia AS DonGiaNhap, TongTien AS TongTienNhap FROM PhieuNhapKho where NgayNhapkho like '%" + ngaynhap + "%'";
             cmd.ExecuteNonQuery();
             DataTable dt = new DataTable();
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             da.Fill(dt);
             dataDsNhap.DataSource = dt;
             int tongTien = 0;
-            for(int i = 0; i < dt.Rows.Count; i++)
+            for (int i = 0; i < dt.Rows.Count; i++)
             {
                 tongTien += Convert.ToInt32(dt.Rows[i]["TongTienNhap"].ToString());
             }
             txtTienNhap.Text = tongTien.ToString();
-            
+
         }
 
-       
+
 
         private void fillDSXuat(string ngayxuat)
         {
@@ -71,7 +71,7 @@ namespace QUANLYKHO
             DataTable dt = new DataTable();
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             da.Fill(dt);
-            int tongTienXuat = 0 ;
+            int tongTienXuat = 0;
             dataDsXuat.DataSource = dt;
             for (int i = 0; i < dt.Rows.Count; i++)
             {
