@@ -86,5 +86,40 @@ namespace QUANLYKHO
             fillDSNhap(ngay);
             fillDSXuat(ngay);
         }
+
+        private void danhSáchPhiếuNhậpKhoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormDanhSachPhieuNhap fn = new FormDanhSachPhieuNhap();
+            fn.Show();
+            this.Hide();
+        }
+
+        private void danhSáchPhiếuXuấtKhoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormDanhSachPhieuXuat fx = new FormDanhSachPhieuXuat();
+            fx.Show();
+            this.Hide();
+        }
+
+        private void tạoPhiếuXuấtKhoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormTaoPhieuNhap ftn = new FormTaoPhieuNhap();
+            this.Hide();
+            ftn.Show();
+        }
+
+        private void tạoPhiếuXuấtKhoToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            FormTaoPhieuXuat ftx = new FormTaoPhieuXuat();
+            this.Hide();
+            ftx.Show();
+        }
+
+        private void đơnHàngToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormDonHang fdh = new FormDonHang();
+            this.Hide();
+            fdh.Show();
+        }
     }
 }

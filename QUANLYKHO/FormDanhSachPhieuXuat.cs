@@ -305,6 +305,14 @@ namespace QUANLYKHO
             
         }
 
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            string curItem = dsMaXuat.SelectedItem.ToString();
+            FormInPhieuX inPX = new FormInPhieuX();
+            inPX.setQuery("SELECT * FROM PhieuXuatKho WHERE MaPhieuXuat='" + curItem + "'");
+            inPX.ShowDialog();
+        }
+
         private void dataDanhSachXuat_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
 

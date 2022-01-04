@@ -52,8 +52,7 @@ namespace QUANLYKHO
                 }
                 MessageBox.Show("Thêm thành công!");
                 this.Close();
-                FormDanhSachPhieuXuat ds = new FormDanhSachPhieuXuat();
-                ds.Show();
+                
             }
         }
 
