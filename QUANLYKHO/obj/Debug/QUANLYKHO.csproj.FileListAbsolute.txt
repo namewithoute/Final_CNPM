@@ -99,3 +99,4 @@ C:\Users\LOVE\Desktop\CUOIKI_CNPM\QUANLYKHO\bin\Debug\zh-CHT\Microsoft.ReportVie
 C:\Users\LOVE\Desktop\CUOIKI_CNPM\QUANLYKHO\obj\Debug\QUANLYKHO.FormInPhieuX.resources
 C:\Users\LOVE\Desktop\CUOIKI_CNPM\QUANLYKHO\obj\Debug\RdlCompile.cache
 C:\Users\LOVE\Desktop\CUOIKI_CNPM\QUANLYKHO\obj\Debug\RdlCompile.compiled
+C:\Users\LOVE\Desktop\CUOIKI_CNPM\QUANLYKHO\obj\Debug\QUANLYKHO.csproj.AssemblyReference.cache

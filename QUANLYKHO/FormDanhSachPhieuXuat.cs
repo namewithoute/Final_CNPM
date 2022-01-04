@@ -283,7 +283,6 @@ namespace QUANLYKHO
         {
             FormTaoPhieuXuat fxk = new FormTaoPhieuXuat();
             fxk.Show();
-            this.Hide();
         }
 
         private void đơnHàngToolStripMenuItem_Click(object sender, EventArgs e)

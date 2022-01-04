@@ -52,6 +52,7 @@ namespace QUANLYKHO
                 }
                 MessageBox.Show("Thêm thành công!");
                 this.Close();
+             
                 
             }
         }
