@@ -165,7 +165,7 @@ namespace QUANLYKHO
         {
 
             FormTaoPhieuNhap taoPhieuNhap = new FormTaoPhieuNhap();
-            taoPhieuNhap.ShowDialog();
+            taoPhieuNhap.Show();
             this.Hide();
         }
 
