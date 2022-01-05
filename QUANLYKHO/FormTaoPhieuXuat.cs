@@ -20,7 +20,7 @@ namespace QUANLYKHO
 
         private void btnXacNhan_Click(object sender, EventArgs e)
         {
-            if (maPhieuXuat.Text.ToString() == "" || tenNguoiNhan.Text.ToString() == "" || soDienThoai.Text.ToString() == "" || diaChi.Text.ToString() == "" || dataTaoPhieuXuat.Rows[0].Cells["MaSanPham"].Value.ToString() == "" || dataTaoPhieuXuat.Rows[0].Cells["TenSanPham"].Value.ToString() == "" || dataTaoPhieuXuat.Rows[0].Cells["SoLuong"].Value.ToString() == "")
+            if (maPhieuXuat.Text.ToString() == "" || tenNguoiNhan.Text.ToString() == "" ||comboTTTT.SelectedItem.ToString()==""||comboTTGH.SelectedItem.ToString()==""|| soDienThoai.Text.ToString() == "" || diaChi.Text.ToString() == "" ||dataTaoPhieuXuat.Rows[0].Cells["MaSanPham"].Value.ToString() == "" || dataTaoPhieuXuat.Rows[0].Cells["TenSanPham"].Value.ToString() == "" || dataTaoPhieuXuat.Rows[0].Cells["SoLuong"].Value.ToString() == "")
             {
                 MessageBox.Show("Vui lòng không để trống");
             }
